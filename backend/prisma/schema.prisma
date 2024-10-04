@@ -1,0 +1,99 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Users {
+  id        Int      @id @default(autoincrement())
+  fullName  String
+  email     String   @unique
+  password  String
+  role      Roles
+  companyId Int?
+  company   Company? @relation(fields: [companyId], references: [id])
+
+  Profile     Profile?
+  Application Application[]
+
+  @@map("users")
+}
+
+enum Roles {
+  USER
+  RECRUITER
+  ADMIN
+}
+
+model Company {
+  id       Int    @id @default(autoincrement())
+  name     String
+  address  String
+  email    String
+  category String
+  website  String
+
+  Users Users[]
+
+  @@map("company")
+}
+
+model Offers {
+  id           Int      @id @default(autoincrement())
+  title        String
+  description  String
+  owner        String
+  salary       String
+  requirements String
+  location     String
+  modality     String
+  status       String
+  creationDate DateTime @map("creation_date")
+  applicants   String
+
+  Application Application[]
+
+  @@map("offers")
+}
+
+model Profile {
+  id         Int    @id @default(autoincrement())
+  userId     Int    @unique
+  about      String
+  experience String
+  studies    String
+  address    String
+  phone      String
+  resume     String // Assuming File is stored as a string path
+
+  user Users @relation(fields: [userId], references: [id])
+
+  @@map("profile")
+}
+
+enum Formation {
+  COLAGE
+  RECRUITER
+  ADMIN
+}
+
+model Application {
+  id         Int     @id @default(autoincrement())
+  userId     Int     @unique
+  offerId    Int     @unique
+  hasApplied Boolean
+
+  user  Users  @relation(fields: [userId], references: [id])
+  offer Offers @relation(fields: [offerId], references: [id])
+
+  @@map("application")
+}
