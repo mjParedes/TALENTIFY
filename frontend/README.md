@@ -170,6 +170,19 @@ export function BearCounter(){
 
 Mas información en [Zustand Docs](https://zustand.docs.pmnd.rs/guides/typescript)
 
+### Problemas o errores con typescript:
+
+Para no retrasar el avance por errores de typescript, en caso de emergencia se puede utilizar el type helper TODO, ubicado en src/types/helpers. Ejemplo:
+
+```typescript
+import { TODO } from "@/types/helpers";
+
+interface SomeComponentProps {
+  title: string;
+  someCallback: TODO;
+}
+```
+
 # Git Workflow
 
 ## Branching Strategy
