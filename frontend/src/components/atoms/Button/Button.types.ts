@@ -1,8 +1,8 @@
-export interface ButtonProps {
-    type?: "button" | "submit" | "reset";
-    variant: "primary" | "secondary"
-    buttonSize: "small" | "large"
-    disabled: boolean
-    onClick?: (e: React.MouseEvent<HTMLButtonElement>) => void;
-    label?: string
+import type { VariantProps } from "class-variance-authority";
+import type { buttonVariants } from "./Button.styles";
+
+export interface ButtonProps
+  extends React.ButtonHTMLAttributes<HTMLButtonElement>,
+    VariantProps<typeof buttonVariants> {
+  asChild?: boolean;
 }
