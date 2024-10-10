@@ -5,12 +5,8 @@ import * as bcrypt from "bcrypt";
 const prisma = new PrismaClient();
 
 export class AuthService {
-  constructor(private readonly jwtInstance = jwt) {}
+  constructor(private readonly jwtInstance = jwt) { }
 
-  /**
-   * Valida el usuario comparando el nombre de usuario o correo electrónico
-   * con la contraseña proporcionada.
-   */
   public async validateUser(
     usernameOrEmail: string,
     password: string
@@ -25,11 +21,9 @@ export class AuthService {
       },
     });
 
-    // Si se encuentra el usuario y la contraseña coincide, lo retorna
     if (user && await bcrypt.compare(password, user.password)) {
       return user;
     }
-
     return null;
   }
 
@@ -46,16 +40,18 @@ export class AuthService {
   public async generateJWT(
     user: any
   ): Promise<{ accessToken: string; user: any }> {
-    // Consulta el rol del usuario si es necesario
     const userWithRole = await prisma.users.findUnique({
       where: { id: user.id },
-      include: { role: true }, // Incluye el rol en la consulta
     });
+
+    if (!userWithRole) {
+      throw new Error("User not found");
+    }
 
     // Define el payload del token
     const payload: jwt.JwtPayload = {
-      role: userWithRole?.role?.user || "USER", // Asume un rol "user" si no se define
-      sub: userWithRole!.id,
+      role: userWithRole.role || "USER",
+      sub: String(userWithRole.id),
     };
 
     // Genera y devuelve el token y el usuario
