@@ -1,13 +1,23 @@
-import { type FC } from "react";
+import type { FC } from "react";
+import { cn } from "@/utils/cn";
+import { labelVariants } from "./Label.styles";
 import { type LabelProps } from "./Label.types";
 
-export const Label: FC<LabelProps> = ({ htmlFor, text, isError = false }) => {
+export const Label: FC<LabelProps> = ({
+  htmlFor,
+  isError = false,
+  variant,
+  className,
+  ...props
+}) => {
   return (
     <label
       htmlFor={htmlFor}
-      className={`block ${isError ? "text-sm text-red-600" : "text-md text-white"}`}
-    >
-      {text}
-    </label>
+      className={cn(
+        labelVariants({ variant, className }),
+        isError && "border-red-600"
+      )}
+      {...props}
+    />
   );
 };
