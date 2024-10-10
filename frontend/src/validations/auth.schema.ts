@@ -13,16 +13,16 @@ export const emailSchema = z
 
 export const fullNameSchema = z
   .string()
-  .min(2)
-  .max(60, { message: "La contraseña debe tener como máximo 60 caracteres" });
+  .min(2, { message: "El nombre debería tener al menos 2 caracteres" })
+  .max(60, { message: "El nombre debe tener como máximo 60 caracteres" });
 
 // TODO: una vez definido si el rol va a ser por un selector o un check,
-// cambiar este schema y añadirlo al registrationSchema
+// cambiar este schema y añadirlo al registerSchema
 export const roleSchema = z.enum(["Usuario", "Reclutador"]);
 
 // Esquemas de validación compuestos:
 
-export const registrationSchema = z
+export const registerSchema = z
   .object({
     fullName: fullNameSchema,
     email: emailSchema,
