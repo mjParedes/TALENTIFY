@@ -1,3 +1,9 @@
+import { Hero } from "@/components/organisms/Hero/Hero";
+
 export default function Home() {
-  return <div>Home</div>;
+  return (
+    <main className="w-full">
+      <Hero />
+    </main>
+  );
 }
