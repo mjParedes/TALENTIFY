@@ -1,20 +1,9 @@
-export interface InputProps {
-    type:
-    | "text"
-    | "password"
-    | "email"
-    | "number"
-    | "date"
-    | "url"
-    | "tel"
-    | "file"
-    | "search"
-    disabled: boolean
-    variant: "primary" | "secondary"
-    inputSize: "small" | "large"
-    value?: string | number
-    name: string
-    id?:string
-    placeholder?: string
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void
+import type { InputHTMLAttributes } from "react";
+import type { VariantProps } from "class-variance-authority";
+import type { inputVariants } from "./Input.styles";
+
+export interface InputProps
+  extends InputHTMLAttributes<HTMLInputElement>,
+    VariantProps<typeof inputVariants> {
+  isError?: boolean;
 }
