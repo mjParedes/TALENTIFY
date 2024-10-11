@@ -1,6 +1,7 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors"
+import authRoute from './routes/auth.route'
 
 
 dotenv.config();
@@ -13,8 +14,9 @@ app.use(cors({
 app.use(express.json())
 
 // Enrutamiento prefijado
+app.use('/api/auth', authRoute )
 // app.use('/api/users')
-// app.use('/api/companies')
+// app.use('/api/company')
 // app.use('/api/offers')
 // app.use('/api/profiles')
 // app.use('/api/applications')

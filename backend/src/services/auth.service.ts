@@ -57,7 +57,7 @@ export class AuthService {
     // Genera y devuelve el token y el usuario
     return {
       accessToken: this.signToken(payload, process.env.JWT_SECRET!),
-      user: { ...userWithRole, password: undefined }, // No incluimos la contraseña
+      user: { ...userWithRole, password: undefined }, 
     };
   }
 }
