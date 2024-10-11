@@ -2,6 +2,8 @@ import express from "express";
 import dotenv from "dotenv";
 import cors from "cors"
 import authRoute from './routes/auth.route'
+import userRoutes from "./routes/userRoutes"
+
 
 
 dotenv.config();
@@ -20,6 +22,8 @@ app.use('/api/auth', authRoute )
 // app.use('/api/offers')
 // app.use('/api/profiles')
 // app.use('/api/applications')
+
+app.use('/api/users',userRoutes);
 
 app.get("/api/", (req, res) => {
   res.send("Welcome to TALENTIFY.COM- We make it happen ");
