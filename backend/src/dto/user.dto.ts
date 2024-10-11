@@ -1,7 +1,8 @@
 import { IsEmail, IsOptional, IsString, IsEnum, IsInt } from 'class-validator';
-import { Roles } from '@prisma/client'; // Asegúrate de que Prisma genere este enum
+import { Roles } from '@prisma/client';
 
 export class UserDto {
+    @IsOptional()  
     @IsInt()
     id: number;
 
@@ -11,7 +12,7 @@ export class UserDto {
     @IsEmail()
     email: string;
 
-    @IsOptional() // Este campo no se expondrá al devolver datos
+    @IsOptional()
     password?: string;
 
     @IsEnum(Roles)
@@ -22,14 +23,17 @@ export class UserDto {
     companyId?: number;
 
     @IsOptional()
-    profile?: any; // Puedes definir un DTO para Profile si es necesario
+    profile?: any;
 
     @IsOptional()
-    applications?: any[]; // Puedes definir un DTO para Application si es necesario
-}
+    applications?: any[];
 
-export enum RoleType {
-    USER = "USER",
-    ADMIN = "ADMIN",
-    RECRUITER = "RECRUITER"
+    constructor(id: number, fullName: string, email: string, role: Roles, companyId?: number, password?: string) {
+        this.id = id;
+        this.fullName = fullName;
+        this.email = email;
+        this.role = role;
+        this.companyId = companyId;
+        this.password = password;
+    }
 }
