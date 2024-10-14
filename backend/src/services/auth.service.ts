@@ -62,3 +62,77 @@ export class AuthService {
   }
 }
 
+
+// import { PrismaClient } from "@prisma/client";
+// import * as jwt from "jsonwebtoken";
+// import * as bcrypt from "bcrypt";
+
+// const prisma = new PrismaClient();
+
+// export class AuthService {
+//   constructor(private readonly jwtInstance = jwt) {}
+
+//   public async validateUser(usernameOrEmail: string, password: string): Promise<any | null> {
+//     try {
+//       // Busca el usuario por email o username
+//       const user = await prisma.users.findFirst({
+//         where: {
+//           OR: [{ email: usernameOrEmail }, { fullName: usernameOrEmail }],
+//         },
+//       });
+
+//       // Si no encuentra el usuario, devuelve null
+//       if (!user) {
+//         return null;
+//       }
+
+//       // Compara las contraseñas
+//       const isPasswordValid = await bcrypt.compare(password, user.password);
+//       if (!isPasswordValid) {
+//         return null; // Contraseña inválida
+//       }
+
+//       return user;
+//     } catch (error) {
+//       console.error("Error en la validación del usuario:", error);
+//       return null; // Manejo de errores
+//     }
+//   }
+
+//   /**
+//    * Genera un token JWT con el payload proporcionado.
+//    */
+//   private signToken(payload: jwt.JwtPayload, secret: string) {
+//     return this.jwtInstance.sign(payload, secret, { expiresIn: "1h" });
+//   }
+
+//   /**
+//    * Genera un JWT y devuelve el usuario junto con el token.
+//    */
+//   public async generateJWT(user: any): Promise<{ accessToken: string; user: any }> {
+//     try {
+//       const userWithRole = await prisma.users.findUnique({
+//         where: { id: user.id },
+//       });
+
+//       if (!userWithRole) {
+//         throw new Error("User not found");
+//       }
+
+//       // Define el payload del token
+//       const payload: jwt.JwtPayload = {
+//         role: userWithRole.role || "USER",
+//         sub: String(userWithRole.id),
+//       };
+
+//       // Genera y devuelve el token y el usuario
+//       return {
+//         accessToken: this.signToken(payload, process.env.JWT_SECRET!),
+//         user: { ...userWithRole, password: undefined },
+//       };
+//     } catch (error) {
+//       console.error("Error al generar el JWT:", error);
+//       throw new Error("Error generando JWT");
+//     }
+//   }
+// }
