@@ -13,7 +13,7 @@ class UserController {
       return res.status(400).json({ errors });
     }
 
-    const { fullName, email, password, role, companyId } = userDto;
+    const { fullName, email, password, role, companyId } = userDto[0];
 
     try {
       const newUser = await userService.createUser(fullName, email, password || '', role, companyId);
@@ -61,7 +61,7 @@ class UserController {
       return res.status(400).json({ errors });
     }
 
-    const { fullName, email, password, role, companyId } = userDto;
+    const { fullName, email, password, role, companyId } = userDto[0];
 
     try {
       const updatedUser = await userService.updateUser(
