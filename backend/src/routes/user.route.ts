@@ -1,6 +1,6 @@
 import { Router, Request, Response } from 'express';
-import userController from '../controllers/userController'; // Make sure this path is correct
-import asyncHandler from '../middlewares/asyncHandler'; // Correct import
+import userController from '../controllers/user.controller'; // Make sure this path is correct
+import asyncHandler from '../middlewares/async.handler.middleware'; // Correct import
 
 const router = Router();
 

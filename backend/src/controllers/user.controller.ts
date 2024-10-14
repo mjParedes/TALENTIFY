@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import { UserDto } from '../dto/user.dto'; // Ensure path to your DTO is correct
-import userService from '../services/userService'; // Ensure correct import of service
+import userService from '../services/user.service'; // Ensure correct import of service
 import { validate } from 'class-validator';
 import { plainToInstance } from 'class-transformer';
 

@@ -69,9 +69,6 @@ model Profile {
   id         Int    @id @default(autoincrement())
   userId     Int    @unique
   about      String
-  experience String
-  studies    String
-  address    String
   phone      String
   resume     String // Assuming File is stored as a string path
 
