@@ -6,15 +6,19 @@ import { PrismaClient } from "@prisma/client";
 const prisma = new PrismaClient();
 
 export class AuthController {
-  constructor(private readonly authService: AuthService) {}
+  constructor(private readonly authService: AuthService) { }
 
   // Registro de usuario
   public async signup(req: Request, res: Response): Promise<Response> {
-    const { email, password, fullName } = req.body;
+    const { email, password, fullName, role } = req.body;
 
     // Validación de campos
     if (!email || !password || !fullName) {
       return res.status(400).json({ message: "Email, password, and full name are required" });
+    }
+    const validRoles = new Set(['USER', 'RECRUITER']);
+    if (role !== undefined && role !== null && !validRoles.has(role)) {
+      return res.status(400).json({ message: "Invalid role" });
     }
 
     // Verificar si el usuario ya existe
@@ -30,7 +34,7 @@ export class AuthController {
         email,
         password: hashedPassword,
         fullName,
-        role: "USER",
+        role: role ?? "USER",
       },
     });
 
@@ -45,7 +49,7 @@ export class AuthController {
     const user = await this.authService.validateUser(usernameOrEmail, password);
 
     if (!user) {
-      return res.status(401).json({ message: "Invalid credentials" });
+      return res.status(401).json({ message: "Invalid credentials: user not found or password is incorrect" });
     }
 
     // Generar token JWT
