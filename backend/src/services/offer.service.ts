@@ -18,8 +18,8 @@ export class OfferService {
                 location,
                 modality,
                 status,
-                creationDate,
-                applicants
+                creationDate: new Date(),
+                applicants: "Jack Reynolds, Martin Sheen, Billy Coudrop, Scarlett Johanson",
             }
         })
     }

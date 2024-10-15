@@ -1,4 +1,4 @@
-import { IsString, IsInt, IsDate, IsNotEmpty } from "class-validator";
+import { IsString, IsInt, IsDate, IsNotEmpty, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
 
 export class CreateOfferDto {
@@ -44,7 +44,8 @@ export class CreateOfferDto {
     creationDate: Date;
 
     @IsString()
-    applicants: string;
+    @IsOptional()
+    applicants: string; 
 
     constructor(id: number, title: string, description: string, owner: string, salary: string, requirements: string, location: string, modality: string, status: string, creationDate: Date, applicants: string) {
         this.id = id;

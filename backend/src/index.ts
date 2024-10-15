@@ -4,7 +4,7 @@ import cors from "cors"
 import authRoute from './routes/auth.route'
 import userRoutes from "./routes/userRoutes"
 import companyRoute from './routes/company.route'
-
+import offerRoute from './routes/offer.route'
 
 
 dotenv.config();
@@ -20,7 +20,7 @@ app.use(express.json())
 app.use('/api/auth', authRoute)
 // app.use('/api/users')
 app.use('/api/company', companyRoute)
-// app.use('/api/offers')
+app.use('/api/offers', offerRoute)
 // app.use('/api/profiles')
 // app.use('/api/applications')
 
