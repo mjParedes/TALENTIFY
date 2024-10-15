@@ -1,28 +1,31 @@
 import { cva } from "class-variance-authority";
 
 export const buttonVariants = cva(
-  "rounded-full border text-white flex font-semibold items-center duration-300 justify-center text-sm transition-all shadow-md hover:shadow-lg focus:shadow-none active:shadow-none",
+  "rounded-[16px] border flex font-medium items-center justify-center text-base",
   {
     variants: {
       variant: {
         default: "",
         primary:
-          "border-transparent bg-cyan-600 active:bg-cyan-700 hover:bg-cyan-700",
+          "border-solid border-[#6650D3] bg-[#6650D3] hover:bg-[#8D79ED] hover:border-[#8D79ED] active:bg-[#503EA5] active:border-[#503EA5] text-white",
         secondary:
-          "bg-transparent border-white hover:border-neutral-300 hover:text-neutral-300 active:text-neutral-300 active:border-neutral-300",
+          "border-solid border-[#3A3A3A] bg-[#3A3A3A] hover:bg-[#7E7E7E] hover:border-[#7E7E7E] active:bg-[#4C4C4C] active:border-[#4C4C4C] text-white",
         disabled:
-          "pointer-events-none opacity-50 shadow-none text-neutral-600 bg-neutral-400",
-        outlined: "border-cyan-600 bg-white hover:bg-cyan-200 text-cyan-600",
+          "pointer-events-none bg-[#C9C9C9] border-solid border-[#C9C9C9]",
+        outlinedDisabled:
+          "pointer-events-none border-solid border-2 border-[#8A8A8A] text-[#8A8A8A]",
+        outlined: 
+          "border-solid border-2 border-[#8A8A8A] text-[#212121] hover:bg-[#DBDBDB] active:bg-[#8A8A8A] active:text-white",
       },
       size: {
-        default: "h-10 px-4",
-        small: "h-9 px-3",
-        large: "h-12 px-8",
+        default: "",
+        small: "py-[11px] w-[130px]",
+        large: "py-[14px] w-[406px]",
       },
     },
     defaultVariants: {
       variant: "primary",
-      size: "default",
+      size: "small",
     },
   }
 );
