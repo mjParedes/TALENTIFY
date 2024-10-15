@@ -37,4 +37,25 @@ export class OfferController {
             res.status(400).json({ message: error.message })
         }
     }
+
+    public async updateOffer(req: Request, res: Response): Promise<void> {
+        try {
+            const id = parseInt(req.params.id)
+            const updateData: Partial<CreateOfferDto> = req.body
+            const offerUpdated = await offerService.update(id, updateData)
+            res.status(200).json(offerUpdated)
+        } catch (error: any) {
+            res.status(400).json({ message: error.message })
+        }
+    }
+
+    public async deleteOffer(req: Request, res: Response): Promise<void> {
+        try {
+            const id = parseInt(req.params.id)
+            await offerService.delete(id)
+            res.status(204).json({ message: 'Offer deleted' })
+        } catch (error: any) {
+            res.status(400).json({ message: error.message })
+        }
+    }
 }
