@@ -13,7 +13,11 @@ const config: Config = {
         foreground: "var(--foreground)",
       },
       fontFamily: {
-        onest: ['var(--font-onest)'],
+        onest: ["var(--font-onest)"],
+      },
+      maxWidth: {
+        "7xl": "78.125rem",
+        "8xl": "90rem",
       },
     },
   },
