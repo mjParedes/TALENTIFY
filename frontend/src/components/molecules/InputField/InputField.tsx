@@ -8,7 +8,6 @@ import type {
   UseFormRegister,
 } from "react-hook-form";
 import { Input } from "../../atoms/Input/Input";
-import { Label } from "../../atoms/Label/Label";
 
 interface InputProps<T extends FieldValues>
   extends InputHTMLAttributes<HTMLInputElement> {
@@ -19,7 +18,6 @@ interface InputProps<T extends FieldValues>
 }
 
 export function InputField<T extends FieldValues>({
-  label,
   name,
   register,
   errors,
@@ -29,10 +27,7 @@ export function InputField<T extends FieldValues>({
   const isError = !!errors?.[name];
   const errorMessage = String(errors?.[name]?.message);
   return (
-    <fieldset className="mb-4">
-      <Label htmlFor={name} variant="default">
-        {label}
-      </Label>
+    <fieldset className="mx-4 mb-4 w-full">
       <Input
         id={name}
         type={type}
@@ -45,7 +40,7 @@ export function InputField<T extends FieldValues>({
         {...props}
       />
       {isError && (
-        <p id={`${name}-error`} className="text-xs text-red-500">
+        <p id={`${name}-error`} className="pl-4 pt-2 text-xs text-[#DA0000]">
           {errorMessage}
         </p>
       )}

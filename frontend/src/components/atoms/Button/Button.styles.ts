@@ -20,7 +20,7 @@ export const buttonVariants = cva(
       size: {
         default: "",
         small: "py-[11px] w-[130px]",
-        large: "py-[14px] w-[406px]",
+        large: "py-[14px] w-full m-w-[406px]",
       },
     },
     defaultVariants: {
