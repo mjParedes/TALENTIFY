@@ -23,13 +23,13 @@ export function RegisterForm() {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex w-full max-w-[406px] flex-col items-center px-4"
+      className="flex w-full max-w-[27.375rem] flex-col items-center px-4"
     >
       <div className="w-full max-w-[406px]">
-        <legend className="mb-4 text-left text-2xl font-bold text-[#212121]">
+        <legend className="text-grey-darkFont mb-4 text-left text-2xl font-bold">
           Crear cuenta
         </legend>
-        <p className="mb-4 text-left text-[14px] text-[#212121]">
+        <p className="text-grey-darkFont mb-4 text-left text-[14px]">
           Completa tu perfil y accede a las mejores vacantes del mercado
           laboral, todo en un solo lugar.
         </p>
@@ -52,6 +52,7 @@ export function RegisterForm() {
         name="password"
         placeholder="Contraseña"
         label="Introduce tu contraseña"
+        type="password"
         register={register}
         errors={errors}
       />
@@ -59,27 +60,28 @@ export function RegisterForm() {
         name="passwordConfirmation"
         placeholder="Confirme su contraseña"
         label="Repite tu contraseña"
+        type="password"
         register={register}
         errors={errors}
       />
       <Button type="submit" variant="primary" size="large">
         Crear cuenta
       </Button>
-      <div className="my-10 w-full max-w-[406px] border-b-[1px] border-solid border-[#8A8A8A]"></div>
+      <div className="border-grey-500 my-10 w-full max-w-[406px] border-b border-solid"></div>
       <Label variant="link" className="mb-10 text-center">
         <a href={"/login"}>¿Ya tienes una cuenta? Inicia sesión</a>
       </Label>
       <div>
-        <legend className="text-[12px] text-[#212121]">
+        <p className="text-grey-darkFont text-center text-xs">
           Al continuar, confirmas tu conformidad con nuestras 
-          <a className="text-[#6650D3] underline decoration-solid" href="">
+          <span className="text-violet-600 underline decoration-solid">
             Condiciones de Uso
-          </a>
+          </span>{" "}
           y que leíste nuestra 
-          <a className="text-[#6650D3] underline decoration-solid" href="">
+          <span className="text-violet-600 underline decoration-solid">
             Declaración de Privacidad y Cookies.
-          </a>
-        </legend>
+          </span>
+        </p>
       </div>
     </form>
   );
