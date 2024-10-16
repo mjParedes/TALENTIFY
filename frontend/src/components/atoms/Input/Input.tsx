@@ -9,8 +9,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
       <input
         ref={ref}
         className={cn(
-          inputVariants({ variant, sizes, className }),
-          isError && "text-red-600"
+          inputVariants({
+            variant: isError ? "error" : variant,
+            sizes,
+            className,
+          })
         )}
         {...props}
       />
