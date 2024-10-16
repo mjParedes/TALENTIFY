@@ -22,23 +22,27 @@ export function InputField<T extends FieldValues>({
   register,
   errors,
   type = "text",
+  children,
   ...props
 }: InputProps<T>) {
   const isError = !!errors?.[name];
   const errorMessage = String(errors?.[name]?.message);
   return (
     <fieldset className="mx-4 mb-4 w-full">
-      <Input
-        id={name}
-        type={type}
-        {...register(name)}
-        variant="primary"
-        sizes="large"
-        isError={isError}
-        aria-invalid={isError}
-        aria-describedby={`${name}-error`}
-        {...props}
-      />
+      <div className="relative">
+        <Input
+          id={name}
+          type={type}
+          {...register(name)}
+          variant="primary"
+          sizes="large"
+          isError={isError}
+          aria-invalid={isError}
+          aria-describedby={`${name}-error`}
+          {...props}
+        />
+        <div className="absolute left-3 top-3 text-gray-400">{children}</div>
+      </div>
       {isError && (
         <p id={`${name}-error`} className="pl-4 pt-2 text-xs text-[#DA0000]">
           {errorMessage}
