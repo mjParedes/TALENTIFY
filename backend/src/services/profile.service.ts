@@ -7,7 +7,7 @@ export class ProfileService {
 
     // Create a new Profile
     public async create(createProfileDto: CreateProfileDto) {
-        const { userId, about, phone, resume } = createProfileDto;
+        const { userId, about, phone, resume, address } = createProfileDto;
 
         return prisma.profile.create({
             data: {
@@ -16,7 +16,8 @@ export class ProfileService {
                 },
                 about,
                 phone,
-                resume
+                resume,
+                address
             }
         });
     }

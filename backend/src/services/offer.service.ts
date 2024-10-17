@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 import { CreateOfferDto } from "../dto/offer.dto";
 
+
 const prisma = new PrismaClient()
 
 export class OfferService {
@@ -17,7 +18,7 @@ export class OfferService {
                 requirements,
                 location,
                 modality,
-                status,
+                status: prisma.OfferStatus[status],
                 creationDate: new Date(),
                 applicants: "Jack Reynolds, Martin Sheen, Billy Coudrop, Scarlett Johanson",
             }
@@ -35,6 +36,9 @@ export class OfferService {
     }
 
     public async update(id: number, updateData: Partial<CreateOfferDto>) {
+        if (updateData.status) {
+            updateData.status = prisma.OfferStatus[updateData.status];
+        }
         return prisma.offers.update({
             where: { id },
             data: updateData

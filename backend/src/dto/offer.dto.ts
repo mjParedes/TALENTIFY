@@ -1,5 +1,8 @@
 import { IsString, IsInt, IsDate, IsNotEmpty, IsOptional } from "class-validator";
 import { Type } from "class-transformer";
+import { PrismaClient } from "@prisma/client"; 
+
+const prisma = new PrismaClient(); 
 
 export class CreateOfferDto {
 
@@ -36,7 +39,7 @@ export class CreateOfferDto {
 
     @IsString()
     @IsNotEmpty()
-    status: string;
+    status: keyof typeof prisma.OfferStatus;
 
     // Transforma strings a Date automáticamente si es necesario
     @Type(() => Date)
