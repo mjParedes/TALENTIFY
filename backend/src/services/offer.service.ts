@@ -23,7 +23,7 @@ export class OfferService {
                 modality,
                 status: OfferStatus[status],
                 creationDate: new Date(),
-                applicants: "Jack Reynolds, Martin Sheen, Billy Coudrop, Scarlett Johanson",
+                applicants: applicants || "Jack Reynolds, Martin Sheen, Billy Coudrop, Scarlett Johanson",
             }
         })
     }
@@ -40,12 +40,16 @@ export class OfferService {
 
     public async update(id: number, updateData: Omit<Partial<CreateOfferDto>, 'id'>) {
         if (updateData.status) {
-            updateData.status = prisma.OfferStatus[updateData.status];
+            updateData.status = OfferStatus[updateData.status]; 
         }
+    
         return prisma.offers.update({
             where: { id },
-            data: updateData
-        })
+            data: {
+                ...updateData,
+                owner: updateData.owner ? { connect: { id: updateData.owner } } : undefined, // Use connect for owner
+            },
+        });
     }
 
     public async delete(id: number) {
