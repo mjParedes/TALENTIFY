@@ -10,6 +10,7 @@ const responseText = `
        {
          "signup": {
            "method": "POST",
+           "url": "/api/auth/signup"
            "request": {
              "email": "string (required)",
              "password": "string (required)",
@@ -19,6 +20,7 @@ const responseText = `
          },
          "login": {
            "method": "POST",
+           "url": "/api/auth/login"
            "request": {
              "email": "string (required)",
              "password": "string (required)"
@@ -45,15 +47,15 @@ const responseText = `
          },
          "getById": {
            "method": "GET",
+           "url": "/api/company/{:id}",
            "request": {
-             "url": "/api/company/{:id}",
              "id": "number (required)"
            }
          },
          "delete": {
            "method": "DELETE",
+            "url": "/api/company/{:id}",
            "request": {
-             "url": "/api/company/{:id}",
              "id": "number (required)"
            }
          }
@@ -68,7 +70,6 @@ const responseText = `
          "create": {
            "method": "POST",
            "request": {
-             "userId": "number (required)",
              "about": "string (required)",
              "phone": "string (required)",
              "resume": "string (required)",
@@ -77,15 +78,15 @@ const responseText = `
          },
          "getById": {
            "method": "GET",
+           "url": "/api/profiles/{:id}",
            "request": {
-             "url": "/api/profiles/{:id}",
              "id": "number (required)"
            }
          },
          "delete": {
            "method": "DELETE",
+           "url": "/api/profiles/{:id}",
            "request": {
-             "url": "/api/profiles/{:id}",
              "id": "number (required)"
            }
          }
@@ -134,7 +135,6 @@ const responseText = `
        }
        </pre><br>
   
-  Note: Full CRUD is available for each endpoint.<br>
 `;
 
 export default responseText;
