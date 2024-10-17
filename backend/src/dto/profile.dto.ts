@@ -24,15 +24,8 @@ export class CreateProfileDto {
     @IsNotEmpty()
     resume: string
 
-<<<<<<< HEAD
-    constructor(id: number, userId: number, about: string,address:string, phone: string, resume: string) {
-=======
-    @IsString()
-    @IsNotEmpty()
-    address: string;
 
     constructor(id: number, userId: number, about: string, phone: string, resume: string, address: string) {
->>>>>>> 24f0b16e0a65b6f0ddc2a4a1e3829f3a54b5ff00
         this.id = id;
         this.userId = userId;
         this.about = about;

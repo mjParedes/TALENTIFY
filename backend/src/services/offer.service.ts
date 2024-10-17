@@ -8,22 +8,14 @@ const prisma = new PrismaClient()
 export class OfferService {
 
     public async create(createOfferDto: CreateOfferDto) {
-<<<<<<< HEAD
         const { title, description, ownerId, salary, requirements, location, modality, status, creationDate } = createOfferDto
-=======
-        const { title, description, owner, salary, requirements, location, modality, status, creationDate, applications } = createOfferDto
->>>>>>> 24f0b16e0a65b6f0ddc2a4a1e3829f3a54b5ff00
 
         return prisma.offers.create({
             data: {
                 title,
                 description,
                 owner: {
-<<<<<<< HEAD
                     connect: { id: ownerId }
-=======
-                    connect: { id: owner },
->>>>>>> 24f0b16e0a65b6f0ddc2a4a1e3829f3a54b5ff00
                 },
                 salary,
                 requirements,
@@ -31,18 +23,6 @@ export class OfferService {
                 modality,
                 status: OfferStatus[status],
                 creationDate: new Date(),
-<<<<<<< HEAD
-=======
-                // applicants: applicants || "Jack Reynolds, Martin Sheen, Billy Coudrop, Scarlett Johanson",
-                applications: applications
-                ? {
-                    create: applications.map(app => ({
-                        user: { connect: { id: app.userId } },  // Connect user by ID
-                        status: app.status,  // Pass the status from ApplicationStatus enum
-                    })),
-                }
-                : undefined,
->>>>>>> 24f0b16e0a65b6f0ddc2a4a1e3829f3a54b5ff00
             }
         })
     }
@@ -58,14 +38,14 @@ export class OfferService {
     }
 
     public async update(id: number, updateData: Partial<CreateOfferDto>) {
-        const { title, description, owner, salary, requirements, location, modality, status, creationDate, applications } = updateData;
+        const { title, description, ownerId, salary, requirements, location, modality, status, creationDate, applications } = updateData;
     
         return prisma.offers.update({
             where: { id },
             data: {
                 title,
                 description,
-                owner: owner ? { connect: { id: owner } } : undefined,  // Connect owner by ID if provided
+                owner: ownerId ? { connect: { id: ownerId } } : undefined,  // Connect owner by ID if provided
                 salary,
                 requirements,
                 location,
