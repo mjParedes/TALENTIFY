@@ -24,7 +24,7 @@ ALTER TABLE "application" DROP CONSTRAINT "application_offerId_fkey";
 ALTER TABLE "application" DROP CONSTRAINT "application_userId_fkey";
 
 -- AlterTable
-ALTER TABLE "company" ADD COLUMN     "country" TEXT,
+ALTER TABLE "company" ADD COLUMN     "country" TEXT NOT NULL,
 ADD COLUMN     "imageUrl" TEXT;
 
 -- AlterTable
