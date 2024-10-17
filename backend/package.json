@@ -4,15 +4,16 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "build": "npx tsc",
+   "build": "npx tsc",
     "tsc": "tsc",
-    "start": "node dist/index.js",
+    "start": "npm run migrate && node dist/index.js",
     "dev": "ts-node-dev src/index.ts",
     "prisma:migrate:dev": "prisma migrate dev",
     "prisma:migrate:prod": "prisma migrate deploy",
     "prisma:studio": "prisma studio",
     "prisma:generate": "prisma generate",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "migrate": "npx prisma migrate deploy"
   },
   "author": "",
   "license": "ISC",
