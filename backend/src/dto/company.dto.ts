@@ -13,7 +13,6 @@ export class CreateCompanyDto {
     address: string
 
     @IsString()
-    @IsNotEmpty()
     country: string;
 
     @IsEmail()
