@@ -6,7 +6,7 @@ const prisma = new PrismaClient()
 export class CompanyService {
 
     public async create(createCompanyDto: CreateCompanyDto) {
-        const { name, address, email, category, website } = createCompanyDto
+        const { name, address, email, category, website, country } = createCompanyDto
 
         return prisma.company.create({
             data: {
@@ -14,7 +14,8 @@ export class CompanyService {
                 address,
                 email,
                 category,
-                website
+                website,
+                country
             }
         })
     }

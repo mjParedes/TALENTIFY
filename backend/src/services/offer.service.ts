@@ -18,7 +18,7 @@ export class OfferService {
                 requirements,
                 location,
                 modality,
-                status: prisma.OfferStatus[status],
+                status: PrismaClient.OfferStatus[status],
                 creationDate: new Date(),
                 applicants: "Jack Reynolds, Martin Sheen, Billy Coudrop, Scarlett Johanson",
             }

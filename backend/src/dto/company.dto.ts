@@ -12,6 +12,10 @@ export class CreateCompanyDto {
     @IsNotEmpty()
     address: string
 
+    @IsString()
+    @IsNotEmpty()
+    country: string;
+
     @IsEmail()
     @IsNotEmpty()
     email: string
@@ -23,10 +27,11 @@ export class CreateCompanyDto {
     website: string
 
     constructor(
-        id: number, name: string, address: string, email: string, category: string, website: string) {
+        id: number, name: string, address: string, country: string, email: string, category: string, website: string) {
         this.id = id;
         this.name = name;
         this.address = address;
+        this.country = country;
         this.email = email
         this.category = category;
         this.website = website;
