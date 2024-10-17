@@ -20,11 +20,16 @@ export class CreateProfileDto {
     @IsNotEmpty()
     resume: string  
 
-    constructor(id: number, userId: number, about: string, phone: string, resume: string) {
+    @IsString()
+    @IsNotEmpty()
+    address: string;
+
+    constructor(id: number, userId: number, about: string, phone: string, resume: string, address: string) {
         this.id = id;
         this.userId = userId;
         this.about = about;
         this.phone = phone;
         this.resume = resume;
+        this.address = address;
     }
 }
