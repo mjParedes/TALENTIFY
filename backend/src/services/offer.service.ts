@@ -6,20 +6,21 @@ const prisma = new PrismaClient()
 export class OfferService {
 
     public async create(createOfferDto: CreateOfferDto) {
-        const { title, description, owner, salary, requirements, location, modality, status, creationDate, applicants } = createOfferDto
+        const { title, description, ownerId, salary, requirements, location, modality, status, creationDate } = createOfferDto
 
         return prisma.offers.create({
             data: {
                 title,
                 description,
-                owner,
+                owner: {
+                    connect: { id: ownerId }
+                },
                 salary,
                 requirements,
                 location,
                 modality,
                 status,
                 creationDate: new Date(),
-                applicants: "Jack Reynolds, Martin Sheen, Billy Coudrop, Scarlett Johanson",
             }
         })
     }

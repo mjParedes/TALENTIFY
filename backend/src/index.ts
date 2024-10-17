@@ -6,6 +6,7 @@ import userRoute from "./routes/user.route"
 import companyRoute from './routes/company.route'
 import offerRoute from './routes/offer.route'
 import profileRoute from './routes/profile.route'
+import experienceRoute from './routes/experience.route'
 
 
 dotenv.config();
@@ -24,6 +25,7 @@ app.use('/api/company', companyRoute)
 app.use('/api/offers', offerRoute)
 app.use('/api/profiles', profileRoute)
 // app.use('/api/applications')
+app.use('/api/experience', experienceRoute)
 
 
 app.get("/api/", (req, res) => {

@@ -1,20 +1,25 @@
 import { PrismaClient } from "@prisma/client";
 import { CreateCompanyDto } from '../dto/company.dto';
+import { cloudinaryHandler } from "../utils/cloudinary.use";
 
 const prisma = new PrismaClient()
 
 export class CompanyService {
 
     public async create(createCompanyDto: CreateCompanyDto) {
-        const { name, address, email, category, website } = createCompanyDto
+        const { name, address, country, email, category, website, imageUrl } = createCompanyDto
+
+        const imageUpload = await this.uploadImage(imageUrl)
 
         return prisma.company.create({
             data: {
                 name,
                 address,
+                country,
                 email,
                 category,
-                website
+                website,
+                imageUrl: imageUpload
             }
         })
     }
@@ -40,6 +45,15 @@ export class CompanyService {
         return prisma.company.delete({
             where: { id },
         })
+    }
+
+    private async uploadImage(image: string): Promise<string> {
+        try {
+            const imageUpload = await cloudinaryHandler(image)
+            return imageUpload
+        } catch (error: any) {
+            throw new Error(`Error al subir imagen: ${error.message}`)
+        }
     }
 
 }
