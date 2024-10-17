@@ -1,5 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 import { CreateOfferDto } from "../dto/offer.dto";
+import { OfferStatus } from '../enums/offer.enum'
 
 
 const prisma = new PrismaClient()
@@ -18,7 +19,7 @@ export class OfferService {
                 requirements,
                 location,
                 modality,
-                status: PrismaClient.OfferStatus[status],
+                status: OfferStatus,
                 creationDate: new Date(),
                 applicants: "Jack Reynolds, Martin Sheen, Billy Coudrop, Scarlett Johanson",
             }
