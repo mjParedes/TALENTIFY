@@ -40,7 +40,7 @@ export function InputField<T extends FieldValues>({
         {...props}
       />
       {isError && (
-        <p id={`${name}-error`} className="pl-4 pt-2 text-xs text-[#DA0000]">
+        <p id={`${name}-error`} className="text-red-alert pl-4 pt-2 text-xs">
           {errorMessage}
         </p>
       )}
