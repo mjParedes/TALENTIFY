@@ -21,7 +21,7 @@ export class OfferService {
                 requirements,
                 location,
                 modality,
-                status: OfferStatus,
+                status: OfferStatus[status],
                 creationDate: new Date(),
                 applicants: "Jack Reynolds, Martin Sheen, Billy Coudrop, Scarlett Johanson",
             }
@@ -38,7 +38,7 @@ export class OfferService {
         })
     }
 
-    public async update(id: number, updateData: Partial<CreateOfferDto>) {
+    public async update(id: number, updateData: Omit<Partial<CreateOfferDto>, 'id'>) {
         if (updateData.status) {
             updateData.status = prisma.OfferStatus[updateData.status];
         }
