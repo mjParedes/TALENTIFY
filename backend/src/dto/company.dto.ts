@@ -13,8 +13,12 @@ export class CreateCompanyDto {
     address: string
 
     @IsString()
+<<<<<<< HEAD
     @IsNotEmpty()
     country: string
+=======
+    country: string;
+>>>>>>> 24f0b16e0a65b6f0ddc2a4a1e3829f3a54b5ff00
 
     @IsEmail()
     @IsNotEmpty()
@@ -30,7 +34,11 @@ export class CreateCompanyDto {
     imageUrl: string
 
     constructor(
+<<<<<<< HEAD
         id: number, name: string, address: string, country: string, email: string, category: string, website: string,imageUrl:string) {
+=======
+        id: number, name: string, address: string, country: string, email: string, category: string, website: string) {
+>>>>>>> 24f0b16e0a65b6f0ddc2a4a1e3829f3a54b5ff00
         this.id = id;
         this.name = name;
         this.address = address;

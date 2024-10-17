@@ -7,9 +7,13 @@ const prisma = new PrismaClient()
 export class CompanyService {
 
     public async create(createCompanyDto: CreateCompanyDto) {
+<<<<<<< HEAD
         const { name, address, country, email, category, website, imageUrl } = createCompanyDto
 
         const imageUpload = await this.uploadImage(imageUrl)
+=======
+        const { name, address, email, category, website, country } = createCompanyDto
+>>>>>>> 24f0b16e0a65b6f0ddc2a4a1e3829f3a54b5ff00
 
         return prisma.company.create({
             data: {
@@ -19,7 +23,11 @@ export class CompanyService {
                 email,
                 category,
                 website,
+<<<<<<< HEAD
                 imageUrl: imageUpload
+=======
+                country
+>>>>>>> 24f0b16e0a65b6f0ddc2a4a1e3829f3a54b5ff00
             }
         })
     }
