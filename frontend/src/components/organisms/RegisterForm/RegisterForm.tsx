@@ -1,6 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { User, Mail, Lock } from "lucide-react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { type z } from "zod";
 import { Label } from "@/components/atoms/Label/Label";
@@ -40,14 +41,20 @@ export function RegisterForm() {
         label="Introduce tu email"
         register={register}
         errors={errors}
-      />
+      >
+        <Mail />
+      </InputField>
+
       <InputField
         name="fullName"
         placeholder="Nombre y Apellido"
         label="Introduce tu nombre completo"
         register={register}
         errors={errors}
-      />
+      >
+        <User />
+      </InputField>
+
       <InputField
         name="password"
         placeholder="Contraseña"
@@ -55,7 +62,10 @@ export function RegisterForm() {
         type="password"
         register={register}
         errors={errors}
-      />
+      >
+        <Lock />
+      </InputField>
+
       <InputField
         name="passwordConfirmation"
         placeholder="Confirme su contraseña"
@@ -63,7 +73,10 @@ export function RegisterForm() {
         type="password"
         register={register}
         errors={errors}
-      />
+      >
+        <Lock />
+      </InputField>
+
       <Button type="submit" variant="primary" size="large">
         Crear cuenta
       </Button>

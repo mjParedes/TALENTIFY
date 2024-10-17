@@ -1,6 +1,7 @@
-import { RoleType } from "../dto/user.dto"
+// import { RoleType } from "../dto/user.dto"
+import { Roles } from "../enums/roles.enum";
 
 export interface PayloadToken {
-    role: RoleType,
+    role: Roles,
     sub: string
 }

@@ -1,11 +1,13 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors"
+import responseText from './assets/response.text';
 import authRoute from './routes/auth.route'
 import userRoute from "./routes/user.route"
 import companyRoute from './routes/company.route'
 import offerRoute from './routes/offer.route'
 import profileRoute from './routes/profile.route'
+import experienceRoute from './routes/experience.route'
 
 
 dotenv.config();
@@ -24,13 +26,19 @@ app.use('/api/company', companyRoute)
 app.use('/api/offers', offerRoute)
 app.use('/api/profiles', profileRoute)
 // app.use('/api/applications')
+app.use('/api/experience', experienceRoute)
 
 
 app.get("/api/", (req, res) => {
-  res.send("Welcome to TALENTIFY.COM- We make it happen ");
+  res.send(responseText);
 });
 
-const port = process.env.PORT;
+const port = process.env.PORT || 3000;
+const environment = process.env.NODE_ENV || 'development';
 app.listen(port, () => {
-  console.log(`[server]: Server is running at http://localhost:${port}/api/`);
+  if (environment === 'production') {
+    console.log(`[server]: Server is running at the Railway public URL`);
+  } else {
+    console.log(`[server]: Server is running at http://localhost:${port}/api/`);
+  }
 });
