@@ -1,6 +1,8 @@
 "use client";
 
+import { useState } from "react";
 import type { InputHTMLAttributes } from "react";
+import { Eye, EyeOff } from "lucide-react";
 import type {
   FieldErrors,
   FieldValues,
@@ -15,6 +17,7 @@ interface InputProps<T extends FieldValues>
   name: Path<T>;
   register: UseFormRegister<T>;
   errors?: FieldErrors<T>;
+  children?: React.ReactNode;
 }
 
 export function InputField<T extends FieldValues>({
@@ -27,12 +30,21 @@ export function InputField<T extends FieldValues>({
 }: InputProps<T>) {
   const isError = !!errors?.[name];
   const errorMessage = String(errors?.[name]?.message);
+  const [showPassword, setShowPassword] = useState(false);
+  const showText = showPassword ? "text" : "password";
+
   return (
-    <fieldset className="mx-4 mb-4 w-full">
-      <div className="relative">
+    <fieldset className="relative mx-4 mb-4 w-full">
+      <div className="relative flex items-center">
+        {children && (
+          <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
+            {children}
+          </div>
+        )}
         <Input
           id={name}
-          type={type}
+          type={type === "password" ? showText : type}
+          className="rounded-lg border border-gray-300 pl-10 pr-10"
           {...register(name)}
           variant="primary"
           sizes="large"
@@ -41,7 +53,15 @@ export function InputField<T extends FieldValues>({
           aria-describedby={`${name}-error`}
           {...props}
         />
-        <div className="absolute left-3 top-3 text-gray-400">{children}</div>
+        {type === "password" && (
+          <button
+            type="button"
+            className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500"
+            onClick={() => setShowPassword(!showPassword)}
+          >
+            {showPassword ? <EyeOff /> : <Eye />}
+          </button>
+        )}
       </div>
       {isError && (
         <p id={`${name}-error`} className="pl-4 pt-2 text-xs text-[#DA0000]">
