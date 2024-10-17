@@ -14,7 +14,9 @@ export class OfferService {
             data: {
                 title,
                 description,
-                owner,
+                owner: {
+                    connect: { id: owner },
+                },
                 salary,
                 requirements,
                 location,

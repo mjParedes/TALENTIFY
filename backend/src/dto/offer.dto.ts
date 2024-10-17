@@ -20,7 +20,7 @@ export class CreateOfferDto {
 
     @IsString()
     @IsNotEmpty()
-    owner: string;
+    owner: number;
 
     @IsString()
     @IsNotEmpty()
@@ -51,7 +51,7 @@ export class CreateOfferDto {
     @IsOptional()
     applicants: string; 
 
-    constructor(id: number, title: string, description: string, owner: string, salary: string, requirements: string, location: string, modality: string, status: OfferStatus, creationDate: Date, applicants: string) {
+    constructor(id: number, title: string, description: string, owner: number, salary: string, requirements: string, location: string, modality: string, status: OfferStatus, creationDate: Date, applicants: string) {
         this.id = id;
         this.title = title;
         this.description = description;
