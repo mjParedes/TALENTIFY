@@ -8,7 +8,7 @@ const prisma = new PrismaClient()
 export class OfferService {
 
     public async create(createOfferDto: CreateOfferDto) {
-        const { title, description, owner, salary, requirements, location, modality, status, creationDate, applicants } = createOfferDto
+        const { title, description, owner, salary, requirements, location, modality, status, creationDate, applications } = createOfferDto
 
         return prisma.offers.create({
             data: {
@@ -23,7 +23,15 @@ export class OfferService {
                 modality,
                 status: OfferStatus[status],
                 creationDate: new Date(),
-                applicants: applicants || "Jack Reynolds, Martin Sheen, Billy Coudrop, Scarlett Johanson",
+                // applicants: applicants || "Jack Reynolds, Martin Sheen, Billy Coudrop, Scarlett Johanson",
+                applications: applications
+                ? {
+                    create: applications.map(app => ({
+                        user: { connect: { id: app.userId } },  // Connect user by ID
+                        status: app.status,  // Pass the status from ApplicationStatus enum
+                    })),
+                }
+                : undefined,
             }
         })
     }
@@ -38,19 +46,34 @@ export class OfferService {
         })
     }
 
-    public async update(id: number, updateData: Omit<Partial<CreateOfferDto>, 'id'>) {
-        if (updateData.status) {
-            updateData.status = OfferStatus[updateData.status]; 
-        }
+    public async update(id: number, updateData: Partial<CreateOfferDto>) {
+        const { title, description, owner, salary, requirements, location, modality, status, creationDate, applications } = updateData;
     
         return prisma.offers.update({
             where: { id },
             data: {
-                ...updateData,
-                owner: updateData.owner ? { connect: { id: updateData.owner } } : undefined, // Use connect for owner
-            },
+                title,
+                description,
+                owner: owner ? { connect: { id: owner } } : undefined,  // Connect owner by ID if provided
+                salary,
+                requirements,
+                location,
+                modality,
+                status,
+                creationDate: creationDate || new Date(),
+                applications: applications
+                    ? {
+                        upsert: applications.map(app => ({
+                            where: { id: app.userId },  // Unique field (id) in the Application model
+                            create: { userId: app.userId, status: app.status },
+                            update: { status: app.status },
+                        }))
+                    }
+                    : undefined,  // Upsert applications if provided
+            }
         });
     }
+    
 
     public async delete(id: number) {
         return prisma.offers.delete({

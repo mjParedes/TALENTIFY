@@ -2,6 +2,7 @@ import { IsString, IsInt, IsDate, IsNotEmpty, IsOptional } from "class-validator
 import { Type } from "class-transformer";
 import { PrismaClient } from "@prisma/client"; 
 import { OfferStatus } from '../enums/offer.enum'
+import { ApplicationStatus } from '../enums/application.enum';  
 
 const prisma = new PrismaClient(); 
 
@@ -18,7 +19,7 @@ export class CreateOfferDto {
     @IsNotEmpty()
     description: string;
 
-    @IsString()
+    @IsInt()
     @IsNotEmpty()
     owner: number;
 
@@ -47,11 +48,13 @@ export class CreateOfferDto {
     @IsDate()
     creationDate: Date;
 
-    @IsString()
     @IsOptional()
-    applicants: string; 
+    applications: {
+        userId: number;
+        status: ApplicationStatus;
+    }[];  // Array of application data
 
-    constructor(id: number, title: string, description: string, owner: number, salary: string, requirements: string, location: string, modality: string, status: OfferStatus, creationDate: Date, applicants: string) {
+    constructor(id: number, title: string, description: string, owner: number, salary: string, requirements: string, location: string, modality: string, status: OfferStatus, creationDate: Date, applications: { userId: number, status: ApplicationStatus }[]) {
         this.id = id;
         this.title = title;
         this.description = description;
@@ -62,6 +65,6 @@ export class CreateOfferDto {
         this.modality = modality;
         this.status = status;
         this.creationDate = creationDate;
-        this.applicants = applicants;
+        this.applications = applications;
     }
 }
