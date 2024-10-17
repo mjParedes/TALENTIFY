@@ -1,44 +1,76 @@
-import { IsString, IsInt, IsDate, IsNotEmpty, IsOptional } from "class-validator";
+import { IsString, IsInt, IsNotEmpty, IsEnum, IsDate } from "class-validator";
 import { Type } from "class-transformer";
+<<<<<<< HEAD
+import { OfferStatus } from "@prisma/client";
+=======
 import { PrismaClient } from "@prisma/client"; 
 import { OfferStatus } from '../enums/offer.enum'
 import { ApplicationStatus } from '../enums/application.enum';  
 
 const prisma = new PrismaClient(); 
+>>>>>>> 24f0b16e0a65b6f0ddc2a4a1e3829f3a54b5ff00
 
 export class CreateOfferDto {
+  @IsInt()
+  id: number;
 
-    @IsInt()
-    id: number;
+  @IsString()
+  @IsNotEmpty()
+  title: string;
 
-    @IsString()
-    @IsNotEmpty()
-    title: string;
+  @IsString()
+  @IsNotEmpty()
+  description: string;
 
-    @IsString()
-    @IsNotEmpty()
-    description: string;
+  @IsInt()
+  ownerId: number;
 
+<<<<<<< HEAD
+  @IsString()
+  @IsNotEmpty()
+  salary: string;
+=======
     @IsInt()
     @IsNotEmpty()
     owner: number;
+>>>>>>> 24f0b16e0a65b6f0ddc2a4a1e3829f3a54b5ff00
 
-    @IsString()
-    @IsNotEmpty()
-    salary: string;
+  @IsString()
+  @IsNotEmpty()
+  requirements: string;
 
-    @IsString()
-    @IsNotEmpty()
-    requirements: string;
+  @IsString()
+  @IsNotEmpty()
+  location: string;
 
-    @IsString()
-    @IsNotEmpty()
-    location: string;
+  @IsString()
+  @IsNotEmpty()
+  modality: string;
 
-    @IsString()
-    @IsNotEmpty()
-    modality: string;
+  @IsEnum(OfferStatus)
+  @IsNotEmpty()
+  status: OfferStatus;
 
+<<<<<<< HEAD
+  @Type(() => Date)
+  @IsDate()
+  creationDate: Date;
+
+  constructor(
+    id: number, title: string, description: string, ownerId: number, salary: string, requirements: string, location: string, modality: string, status: OfferStatus, creationDate: Date
+  ) {
+    this.id = id;
+    this.title = title;
+    this.description = description;
+    this.ownerId = ownerId;
+    this.salary = salary;
+    this.requirements = requirements;
+    this.location = location;
+    this.modality = modality;
+    this.status = status;
+    this.creationDate = creationDate;
+  }
+=======
     @IsString()
     @IsNotEmpty()
     status: OfferStatus;
@@ -67,4 +99,5 @@ export class CreateOfferDto {
         this.creationDate = creationDate;
         this.applications = applications;
     }
+>>>>>>> 24f0b16e0a65b6f0ddc2a4a1e3829f3a54b5ff00
 }

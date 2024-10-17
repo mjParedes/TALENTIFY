@@ -8,14 +8,22 @@ const prisma = new PrismaClient()
 export class OfferService {
 
     public async create(createOfferDto: CreateOfferDto) {
+<<<<<<< HEAD
+        const { title, description, ownerId, salary, requirements, location, modality, status, creationDate } = createOfferDto
+=======
         const { title, description, owner, salary, requirements, location, modality, status, creationDate, applications } = createOfferDto
+>>>>>>> 24f0b16e0a65b6f0ddc2a4a1e3829f3a54b5ff00
 
         return prisma.offers.create({
             data: {
                 title,
                 description,
                 owner: {
+<<<<<<< HEAD
+                    connect: { id: ownerId }
+=======
                     connect: { id: owner },
+>>>>>>> 24f0b16e0a65b6f0ddc2a4a1e3829f3a54b5ff00
                 },
                 salary,
                 requirements,
@@ -23,6 +31,8 @@ export class OfferService {
                 modality,
                 status: OfferStatus[status],
                 creationDate: new Date(),
+<<<<<<< HEAD
+=======
                 // applicants: applicants || "Jack Reynolds, Martin Sheen, Billy Coudrop, Scarlett Johanson",
                 applications: applications
                 ? {
@@ -32,6 +42,7 @@ export class OfferService {
                     })),
                 }
                 : undefined,
+>>>>>>> 24f0b16e0a65b6f0ddc2a4a1e3829f3a54b5ff00
             }
         })
     }
