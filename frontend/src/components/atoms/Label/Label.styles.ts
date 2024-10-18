@@ -7,6 +7,8 @@ export const labelVariants = cva(
       variant: {
         default: "text-grey-700",
         primary: "text-violet-600",
+        userName: "text-xl font-bold text-[#212121]",
+        occupation: "text-sm text-gray-500",
       },
     },
     defaultVariants: {

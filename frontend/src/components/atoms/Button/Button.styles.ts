@@ -15,7 +15,11 @@ export const buttonVariants = cva(
           "border-grey-500 text-grey-500 pointer-events-none border-2 border-solid",
         outlined:
           "border-grey-500 text-grey-darkFont hover:bg-grey-100 active:bg-grey-500 border-2 border-solid py-1 active:text-white",
+        textWithIcon:
+          "border-none bg-white text-base font-medium text-violet-900 hover:bg-violet-50 active:bg-violet-200",
+        textWithIconDisabled: "text-grey-500 bg-white",
       },
+
       size: {
         default: "",
         small: "px-4 py-2.5",
