@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Onest } from "next/font/google";
 import { Toaster } from "@/components/atoms/Toast/Toast";
 import { Navbar } from "@/components/organisms/Navbar/Navbar";
+import { ReactQueryProvider } from "../providers/react-query";
 import "./globals.css";
 
 const onest = Onest({
@@ -23,11 +24,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={`${onest.variable} font-onest min-h-screen w-full bg-white antialiased`}
+        className={`${onest.variable} min-h-screen w-full bg-white font-onest antialiased`}
       >
-        <Navbar />
-        {children}
-        <Toaster richColors />
+        <ReactQueryProvider>
+          <Navbar />
+          {children}
+          <Toaster richColors />
+        </ReactQueryProvider>
       </body>
     </html>
   );
