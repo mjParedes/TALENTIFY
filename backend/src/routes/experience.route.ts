@@ -9,10 +9,10 @@ router.post('/', (req, res) => experienceController.createExperience(req, res))
 
 router.get('/', (req, res) => experienceController.getAllExperiences(req, res))
 
-router.get('/', (req, res) => experienceController.getExperienceById(req, res))
+router.get('/:id', (req, res) => experienceController.getExperienceById(req, res))
 
-router.put('/', (req, res) => experienceController.updateExperience(req, res))
+router.put('/:id', (req, res) => experienceController.updateExperience(req, res))
 
-router.delete('/', (req, res) => experienceController.deleteExperience(req, res))
+router.delete('/:id', (req, res) => experienceController.deleteExperience(req, res))
 
 export default router

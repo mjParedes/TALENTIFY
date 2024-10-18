@@ -18,11 +18,11 @@ export class CreateExperienceDto {
     position: string
 
     @Type(() => Date)
-    @IsDate({ message:'this field must be a valid date with format YYYY-MM-DD'})
+    @IsDate({ message:'must be a format ISO8601: 2022-03-06T11:00:00.000Z'})
     start_date: Date;
 
     @Type(() => Date)
-    @IsDate()
+    @IsDate({ message:'must be a format ISO8601: 2022-03-06T11:00:00.000Z'})
     @IsOptional()
     end_date?: Date
 
