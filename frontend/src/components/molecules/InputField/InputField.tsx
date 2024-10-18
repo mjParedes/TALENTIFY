@@ -1,7 +1,7 @@
 "use client";
 
-import { useState } from "react";
 import type { InputHTMLAttributes } from "react";
+import { useState } from "react";
 import { Eye, EyeOff } from "lucide-react";
 import type {
   FieldErrors,
@@ -44,7 +44,6 @@ export function InputField<T extends FieldValues>({
         <Input
           id={name}
           type={type === "password" ? showText : type}
-          className="rounded-lg border border-gray-300 pl-10 pr-10"
           {...register(name)}
           variant="primary"
           sizes="large"
@@ -64,7 +63,7 @@ export function InputField<T extends FieldValues>({
         )}
       </div>
       {isError && (
-        <p id={`${name}-error`} className="text-red-alert pl-4 pt-2 text-xs">
+        <p id={`${name}-error`} className="pl-4 pt-2 text-xs text-red-alert">
           {errorMessage}
         </p>
       )}

@@ -7,8 +7,8 @@ export const inputVariants = cva(
       variant: {
         default: "",
         primary:
-          "flex border-gray-500 pl-11 text-gray-700 focus:border-violet-600 focus:text-grey-darkFont",
-        error: "border-red-500 text-gray-500",
+          "flex border-gray-500 px-10 text-gray-700 focus:border-violet-600 focus:text-grey-darkFont",
+        error: "border-red-500 px-10 text-gray-500 ring-red-500",
       },
       sizes: {
         small: "m-w-[197px] h-10",
