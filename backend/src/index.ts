@@ -8,7 +8,7 @@ import companyRoute from './routes/company.route'
 import offerRoute from './routes/offer.route'
 import profileRoute from './routes/profile.route'
 import experienceRoute from './routes/experience.route'
-
+import favoriteRoute from './routes/favorite.route'
 
 dotenv.config();
 const app = express();
@@ -27,7 +27,7 @@ app.use('/api/offers', offerRoute)
 app.use('/api/profiles', profileRoute)
 // app.use('/api/applications')
 app.use('/api/experience', experienceRoute)
-
+app.use('/api/favorites', favoriteRoute)
 
 app.get("/api/", (req, res) => {
   res.send(responseText);
