@@ -109,7 +109,7 @@ const responseText = `
              "requirements": "string (required)",
              "location": "string (required)",
              "modality": "string (required)",
-             "status": "string (required, valid values: OPEN, CLOSED)"
+             "status": "string (required, valid values: APPLIED, REVIEWED, INTERVIEW, OFFER, REJECTED)"
            }
          },
          "getById": {
@@ -139,7 +139,7 @@ const responseText = `
            "request": {
              "userId": "number (required)",
              "offerId": "number (required)",
-             "status": "string (required, valid values: PENDING, ACCEPTED, REJECTED)"
+             "status": "string (required, valid values: APPLIED, REVIEWED, INTERVIEW, OFFER, REJECTED)"
            }
          },
          "getById": {
