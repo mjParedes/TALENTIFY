@@ -7,7 +7,6 @@ export const labelVariants = cva(
       variant: {
         default: "text-grey-700",
         primary: "text-violet-600",
-        link: "text-sm text-violet-600 underline decoration-solid",
       },
     },
     defaultVariants: {
