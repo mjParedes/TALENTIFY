@@ -109,7 +109,7 @@ const responseText = `
              "requirements": "string (required)",
              "location": "string (required)",
              "modality": "string (required)",
-             "status": "string (required, valid values: APPLIED, REVIEWED, INTERVIEW, OFFER, REJECTED)"
+             "status": "string (required, valid values: OPEN, CLOSED)"
            }
          },
          "getById": {
