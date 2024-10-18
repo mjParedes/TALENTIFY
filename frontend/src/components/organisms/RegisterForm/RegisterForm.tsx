@@ -1,13 +1,16 @@
 "use client";
 
+import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { User, Mail, Lock } from "lucide-react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { type z } from "zod";
-import { Label } from "@/components/atoms/Label/Label";
-import { registerSchema } from "../../../validations/auth.schema";
-import { Button } from "../../atoms/Button/Button";
-import { InputField } from "../../molecules/InputField/InputField";
+import { Button } from "@/components/atoms/Button/Button";
+import { Spinner } from "@/components/atoms/Spinner/Spinner";
+import { Text } from "@/components/atoms/Text/Text";
+import { InputField } from "@/components/molecules/InputField/InputField";
+import { useSignUp } from "@/services/mutations/auth-mutations";
+import { registerSchema } from "@/validations/auth.schema";
 
 type RegisterFormValues = z.infer<typeof registerSchema>;
 
@@ -17,23 +20,26 @@ export function RegisterForm() {
     handleSubmit,
     formState: { errors },
   } = useForm<RegisterFormValues>({ resolver: zodResolver(registerSchema) });
-
-  const onSubmit: SubmitHandler<RegisterFormValues> = (data) => {
-    console.log(data);
+  const signUp = useSignUp();
+  const onSubmit: SubmitHandler<RegisterFormValues> = ({
+    passwordConfirmation: _,
+    ...data
+  }) => {
+    signUp.mutate(data);
   };
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex w-full max-w-[27.375rem] flex-col items-center px-4"
+      className="flex w-full max-w-[27.375rem] flex-col items-center px-4 pb-10"
     >
-      <div className="w-full max-w-[406px]">
-        <legend className="text-grey-darkFont mb-4 text-left text-2xl font-bold">
+      <div className="w-full max-w-[25.375rem]">
+        <Text variant="Headline-2/24" className="mb-4" element="legend">
           Crear cuenta
-        </legend>
-        <p className="text-grey-darkFont mb-4 text-left text-[14px]">
+        </Text>
+        <Text variant="Paragraph-2/14" className="mb-4">
           Completa tu perfil y accede a las mejores vacantes del mercado
           laboral, todo en un solo lugar.
-        </p>
+        </Text>
       </div>
       <InputField
         name="email"
@@ -77,15 +83,21 @@ export function RegisterForm() {
         <Lock />
       </InputField>
 
-      <Button type="submit" variant="primary" size="large">
-        Crear cuenta
+      <Button
+        type="submit"
+        variant="primary"
+        size="large"
+        disabled={signUp.isPending}
+        className="h-12"
+      >
+        {signUp.isPending ? <Spinner className="h-7 w-7" /> : "Crear cuenta"}
       </Button>
-      <div className="border-grey-500 my-10 w-full max-w-[406px] border-b border-solid"></div>
-      <Label variant="link" className="mb-10 text-center">
-        <a href={"/login"}>¿Ya tienes una cuenta? Inicia sesión</a>
-      </Label>
-      <div>
-        <p className="text-grey-darkFont text-center text-xs">
+      <div className="my-6 w-full max-w-[406px] border-b border-solid border-grey-500"></div>
+      <Link href={"/login"} className="mb-6 text-center">
+        <Text variant="link">¿Ya tienes una cuenta? Inicia sesión</Text>
+      </Link>
+      <div className="text-center">
+        <Text variant="Paragraph-3/12">
           Al continuar, confirmas tu conformidad con nuestras 
           <span className="text-violet-600 underline decoration-solid">
             Condiciones de Uso
@@ -94,7 +106,7 @@ export function RegisterForm() {
           <span className="text-violet-600 underline decoration-solid">
             Declaración de Privacidad y Cookies.
           </span>
-        </p>
+        </Text>
       </div>
     </form>
   );
