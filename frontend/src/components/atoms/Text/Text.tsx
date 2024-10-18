@@ -12,6 +12,8 @@ const createText = (variant: TextProps["variant"]): TagElementTypes => {
       return "h2";
     case "Headline-3/20":
       return "h3";
+    case "link":
+      return "span";
     default:
       return "p";
     // throw new Error('Text Variant not supported');

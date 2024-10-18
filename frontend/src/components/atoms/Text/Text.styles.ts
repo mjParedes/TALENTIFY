@@ -16,6 +16,7 @@ export const textVariants = cva("leading-[normal] text-grey-darkFont", {
       "Paragraph-1/16": "text-base font-normal",
       "Paragraph-2/14": "text-sm font-normal",
       "Paragraph-3/12": "text-xs font-normal",
+      link: "text-sm text-violet-600 underline decoration-solid",
     },
   },
   defaultVariants: {
