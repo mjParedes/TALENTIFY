@@ -3,7 +3,7 @@ import { cn } from "@/utils/cn";
 import { inputVariants } from "./Input.styles";
 import { type InputProps } from "./Input.types";
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(
+const Input = forwardRef<HTMLInputElement, InputProps>(
   ({ sizes, variant, className, isError, ...props }, ref) => {
     return (
       <input
@@ -20,3 +20,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(
     );
   }
 );
+
+Input.displayName = "Input";
+export { Input };
