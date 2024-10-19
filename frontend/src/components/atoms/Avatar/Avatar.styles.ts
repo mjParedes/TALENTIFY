@@ -4,11 +4,12 @@ export const avatarVariants = cva("overflow-hidden rounded-full", {
   variants: {
     variant: {
       default: "bg-gray-200",
-      profilePicture: "border-2 border-blue-500",
     },
     size: {
-      small: "h-8 w-8",
-      large: "h-16 w-16",
+      xsmall: "h-9 w-9",
+      small: "h-10 w-10",
+      medium: "h-[42px] w-[42px]",
+      large: "h-12 w-12",
     },
   },
   defaultVariants: {

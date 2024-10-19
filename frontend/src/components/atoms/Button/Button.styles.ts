@@ -23,6 +23,7 @@ export const buttonVariants = cva(
       size: {
         default: "",
         small: "px-4 py-2.5",
+        medium: "px-4 py-3",
         large: "w-full py-3.5",
       },
     },
