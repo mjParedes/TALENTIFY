@@ -26,7 +26,13 @@ export const Avatar: React.FC<AvatarProps> = ({
       {...props}
     >
       {src ? (
-        <Image src={src} alt={alt} className="h-full w-full object-cover" />
+        <Image
+          src={src}
+          alt={alt}
+          width="100"
+          height="100"
+          className="h-full w-full object-cover"
+        />
       ) : (
         <div className="flex h-full w-full items-center justify-center bg-gray-400 text-white">
           {fallBackText}
