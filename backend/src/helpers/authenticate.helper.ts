@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt from 'jsonwebtoken'
 
-export const isAuth = (req: Request, res: Response, next: NextFunction):void => {
+export const isAuth = (req: Request, res: Response, next: NextFunction): void => {
     const authHeader = req.headers['authorization']
     const token = authHeader && authHeader.split(' ')[1]
 
@@ -13,7 +13,7 @@ export const isAuth = (req: Request, res: Response, next: NextFunction):void => 
     jwt.verify(token, process.env.JWT_SECRET as string, (err, user) => {
         if (err) {
             res.status(403).json({ message: 'Invalid or expired token. Access forbidden' })
-            return
+            return 
         }
 
         req.user = user
