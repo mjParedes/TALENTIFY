@@ -14,11 +14,14 @@ export function Navbar() {
         >
           <PageLogo />
         </Link>
-        <NavAuthButtons />
-        <Avatar
-          size="medium"
-          src="https://images.squarespace-cdn.com/content/v1/5d77a7f8ad30356d21445262/1695000300830-5TKAFHC2EBYTTM2QUWUP/fotos-de-perfil-blanco-y-negro.jpg"
-        />
+        {true ? (
+          <Avatar
+            size="medium"
+            src="https://images.squarespace-cdn.com/content/v1/5d77a7f8ad30356d21445262/1695000300830-5TKAFHC2EBYTTM2QUWUP/fotos-de-perfil-blanco-y-negro.jpg"
+          />
+        ) : (
+          <NavAuthButtons />
+        )}
         <UserMenu />
       </div>
     </header>
