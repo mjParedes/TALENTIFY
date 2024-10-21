@@ -12,3 +12,4 @@ router.put("/:id",isAuth,(req, res) => profileController.updateProfile(req, res)
 router.delete("/:id",isAuth,(req, res) => profileController.deleteProfile(req, res));
 
 export default router;
+
