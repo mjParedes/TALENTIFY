@@ -1,7 +1,11 @@
+"use client";
+
 import { Avatar } from "@/components/atoms/Avatar/Avatar";
 import { Text } from "@/components/atoms/Text/Text";
+import { useUserStore } from "@/store/auth.store";
 
 export const InfoUser = () => {
+  const user = useUserStore((state) => state.user);
   return (
     <div className="mb-4 flex w-[19.25rem] items-start gap-2 py-2">
       <Avatar
@@ -10,7 +14,8 @@ export const InfoUser = () => {
       />
       <div>
         <Text variant="Headline-3/20" className="text-grey-darkFont">
-          María Perez
+          {/* María Perez */}
+          {user ? user.fullName : "María Perez"}
         </Text>
         <Text
           variant="Paragraph-2/14"

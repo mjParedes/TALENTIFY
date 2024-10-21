@@ -1,6 +1,7 @@
-import { useMutation } from "@tanstack/react-query";
 import { useRouter } from "next/navigation";
+import { useMutation } from "@tanstack/react-query";
 import { toast } from "sonner";
+import { useUserStore } from "@/store/auth.store";
 import { login, signUp } from "../auth";
 
 export const useSignUp = () => {
@@ -18,9 +19,13 @@ export const useSignUp = () => {
 };
 export const useLogin = () => {
   const router = useRouter();
+  const setUser = useUserStore((state) => state.setUser);
+  const setToken = useUserStore((state) => state.setToken);
   return useMutation({
     mutationFn: login,
-    onSuccess: async () => {
+    onSuccess: async ({ data }) => {
+      setUser(data.user);
+      setToken(data.accessToken);
       toast.success("Inicio de sesión exitoso");
       router.push("/dashboard");
     },
@@ -28,4 +33,13 @@ export const useLogin = () => {
       console.error(err);
     },
   });
+};
+
+export const useLogout = () => {
+  const router = useRouter();
+
+  return () => {
+    useUserStore.getState().clearUser();
+    router.push("/login");
+  };
 };
