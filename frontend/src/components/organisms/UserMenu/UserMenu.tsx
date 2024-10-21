@@ -6,7 +6,7 @@ import { MenuUserButtons } from "@/components/molecules/MenuUserButtons/MenuUser
 
 export const UserMenu = () => {
   return (
-    <div className="absolute right-0 top-0 z-10 flex h-full w-full flex-col items-start justify-between rounded-3xl bg-white p-4 md:right-5 md:top-[83px] md:h-[28.875rem] md:w-[21.25rem] md:border-[1px] md:border-solid md:border-gray-500 xl:right-20 2xl:right-52">
+    <div className="absolute -right-3 top-14 z-10 flex h-full w-full flex-col items-start justify-between rounded-3xl bg-white p-4 md:h-[28.875rem] md:w-[21.25rem] md:border-[1px] md:border-solid md:border-gray-500">
       <Link className="self-end text-gray-900 md:hidden" href="/">
         <X />
       </Link>
