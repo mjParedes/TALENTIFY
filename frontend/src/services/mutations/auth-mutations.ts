@@ -34,3 +34,12 @@ export const useLogin = () => {
     },
   });
 };
+
+export const useLogout = () => {
+  const router = useRouter();
+
+  return () => {
+    useUserStore.getState().clearUser();
+    router.push("/login");
+  };
+};
