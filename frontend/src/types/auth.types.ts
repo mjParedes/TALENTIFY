@@ -5,8 +5,8 @@ export type LoginDto = z.infer<typeof loginSchema>;
 
 export type RegisterDto = Omit<
   z.infer<typeof registerSchema>,
-  "passwordConfirmation"
->;
+  "passwordConfirmation" | "isRecruiter"
+> & { role: Roles };
 
 type Roles = "USER" | "RECRUITER" | "ADMIN";
 export interface UserDataDto {

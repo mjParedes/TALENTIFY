@@ -9,6 +9,8 @@ export const inputVariants = cva(
         primary:
           "focus:text-gray-darkFont flex border-gray-500 px-10 text-gray-700 focus:border-violet-600",
         error: "border-red-500 px-10 text-gray-500 ring-red-500",
+        checkbox:
+          "h-5 w-5 accent-violet-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-violet-600 focus-visible:ring-offset-2",
       },
       sizes: {
         small: "m-w-[197px] h-10",
