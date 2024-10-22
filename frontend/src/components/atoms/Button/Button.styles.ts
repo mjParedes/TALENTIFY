@@ -9,15 +9,15 @@ export const buttonVariants = cva(
         primary:
           "bg-violet-600 text-white hover:bg-violet-400 active:bg-violet-700",
         secondary:
-          "bg-grey-900 hover:bg-grey-600 active:bg-grey-800 text-white",
-        disabled: "bg-grey-200 pointer-events-none border-solid",
+          "bg-grey-900 text-white hover:bg-grey-600 active:bg-grey-800",
+        disabled: "pointer-events-none border-solid bg-grey-200",
         outlinedDisabled:
-          "border-grey-500 text-grey-500 pointer-events-none border-2 border-solid",
+          "pointer-events-none border-2 border-solid border-grey-500 text-grey-500",
         outlined:
-          "border-grey-500 text-grey-darkFont hover:bg-grey-100 active:bg-grey-500 border-2 border-solid py-1 active:text-white",
+          "border-2 border-solid border-grey-500 bg-white py-1 text-grey-darkFont hover:bg-grey-100 active:bg-grey-500 active:text-white",
         textWithIcon:
           "border-none bg-white text-base font-medium text-violet-900 hover:bg-violet-50 active:bg-violet-200",
-        textWithIconDisabled: "text-grey-500 bg-white",
+        textWithIconDisabled: "bg-white text-grey-500",
       },
 
       size: {
