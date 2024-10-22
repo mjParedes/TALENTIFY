@@ -1,10 +1,11 @@
 import Image from "next/image";
 
 type PageLogoProps = {
+  isRecruiter: boolean;
   isFull?: boolean;
 };
 
-export function PageLogo({ isFull = true }: PageLogoProps) {
+export function PageLogo({ isRecruiter, isFull = true }: PageLogoProps) {
   return (
     <div className="flex items-center gap-2">
       <Image
@@ -16,9 +17,13 @@ export function PageLogo({ isFull = true }: PageLogoProps) {
       {isFull && (
         <Image
           alt="Talentify"
-          src="/talentify-name-logo.svg"
-          width={143}
-          height={33}
+          src={
+            isRecruiter
+              ? "/talentify-name-recruiter-logo.svg"
+              : "/talentify-name-logo.svg"
+          }
+          width={isRecruiter ? 118 : 143}
+          height={isRecruiter ? 20 : 33}
         ></Image>
       )}
     </div>
