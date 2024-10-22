@@ -1,6 +1,8 @@
 import express from "express";
 import dotenv from "dotenv";
 import cors from "cors"
+import swaggerUI from 'swagger-ui-express'
+import specs from "./docs/swagger-config";
 import responseText from './assets/response.text';
 import authRoute from './routes/auth.route'
 import userRoute from "./routes/user.route"
@@ -20,6 +22,8 @@ app.use(cors({
 }))
 app.use(express.json())
 
+// Documentacion de API
+app.use('/api/docs', swaggerUI.serve, swaggerUI.setup(specs))
 
 app.use('/api/auth', authRoute)
 app.use('/api/users', userRoute);
