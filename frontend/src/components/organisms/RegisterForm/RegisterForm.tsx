@@ -2,12 +2,13 @@
 
 import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { User, Mail, Lock } from "lucide-react";
+import { Lock, Mail, User } from "lucide-react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { type z } from "zod";
 import { Button } from "@/components/atoms/Button/Button";
 import { Spinner } from "@/components/atoms/Spinner/Spinner";
 import { Text } from "@/components/atoms/Text/Text";
+import { CheckInputField } from "@/components/molecules/CheckInputField/CheckInputField";
 import { InputField } from "@/components/molecules/InputField/InputField";
 import { useSignUp } from "@/services/mutations/auth-mutations";
 import { registerSchema } from "@/validations/auth.schema";
@@ -21,12 +22,15 @@ export function RegisterForm() {
     formState: { errors },
   } = useForm<RegisterFormValues>({ resolver: zodResolver(registerSchema) });
   const signUp = useSignUp();
+
   const onSubmit: SubmitHandler<RegisterFormValues> = ({
     passwordConfirmation: _,
+    isRecruiter,
     ...data
   }) => {
-    signUp.mutate(data);
+    signUp.mutate({ ...data, role: isRecruiter ? "RECRUITER" : "USER" });
   };
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -41,6 +45,10 @@ export function RegisterForm() {
           laboral, todo en un solo lugar.
         </Text>
       </div>
+      <CheckInputField name="isRecruiter" register={register} errors={errors}>
+        Quiero crear una cuenta como{" "}
+        <span className="text-violet-600">reclutador</span>
+      </CheckInputField>
       <InputField
         name="email"
         placeholder="Correo electrónico"
