@@ -18,7 +18,6 @@ interface TextAreaProps<T extends FieldValues>
   fieldStyles?: string;
   register: UseFormRegister<T>;
   errors?: FieldErrors<T>;
-  children?: React.ReactNode;
 }
 
 export function TextAreaField<T extends FieldValues>({
@@ -27,7 +26,6 @@ export function TextAreaField<T extends FieldValues>({
   errors,
   label,
   fieldStyles,
-  children,
   ...props
 }: TextAreaProps<T>) {
   const isError = !!errors?.[name];

@@ -1,5 +1,14 @@
 "use client";
 
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Plus, Trash } from "lucide-react";
+import {
+  Controller,
+  useFieldArray,
+  useForm,
+  type SubmitHandler,
+} from "react-hook-form";
+import { type z } from "zod";
 import { Button } from "@/components/atoms/Button/Button";
 import {
   Select,
@@ -14,15 +23,6 @@ import { Spinner } from "@/components/atoms/Spinner/Spinner";
 import { Text } from "@/components/atoms/Text/Text";
 import { InputField } from "@/components/molecules/InputField/InputField";
 import { jobPostSchema } from "@/validations/jobpost.schema";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Plus, Trash } from "lucide-react";
-import {
-  Controller,
-  useFieldArray,
-  useForm,
-  type SubmitHandler,
-} from "react-hook-form";
-import { type z } from "zod";
 import { Label } from "../../atoms/Label/Label";
 import { TextAreaField } from "../../molecules/TextAreaField/TextAreaField";
 
@@ -111,12 +111,12 @@ export function JobPostForm() {
                     </SelectGroup>
                   </SelectContent>
                 </Select>
-                {!!errors?.["modality"] && (
+                {!!errors?.modality && (
                   <p
                     id={`modality-error`}
                     className="pl-4 pt-2 text-xs text-red-alert"
                   >
-                    {String(errors?.["modality"]?.message)}
+                    {String(errors?.modality?.message)}
                   </p>
                 )}
               </fieldset>
@@ -151,12 +151,12 @@ export function JobPostForm() {
                     </SelectGroup>
                   </SelectContent>
                 </Select>
-                {!!errors?.["contractType"] && (
+                {!!errors?.contractType && (
                   <p
                     id={`contractType-error`}
                     className="pl-4 pt-2 text-xs text-red-alert"
                   >
-                    {String(errors?.["contractType"]?.message)}
+                    {String(errors?.contractType?.message)}
                   </p>
                 )}
               </fieldset>
@@ -188,12 +188,12 @@ export function JobPostForm() {
                     </SelectGroup>
                   </SelectContent>
                 </Select>
-                {!!errors?.["workDay"] && (
+                {!!errors?.workDay && (
                   <p
                     id={`workDay-error`}
                     className="pl-4 pt-2 text-xs text-red-alert"
                   >
-                    {String(errors?.["workDay"]?.message)}
+                    {String(errors?.workDay?.message)}
                   </p>
                 )}
               </fieldset>
@@ -248,6 +248,7 @@ export function JobPostForm() {
           <Button
             type="button"
             variant="textWithIcon"
+            className="text-violet-900"
             onClick={() => append({ description: "" })}
           >
             <span className="flex items-center gap-4">
