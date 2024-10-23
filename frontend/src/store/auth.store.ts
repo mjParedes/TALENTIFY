@@ -21,7 +21,8 @@ export const useUserStore = create<UserState>()(
     }),
     {
       name: "auth-storage",
-      partialize: (state) => ({ token: state.token }), // Persist only token, saving the id would be a security risk
+      //TODO: user data should not be saved, remove user when API with user data is ready
+      partialize: (state) => ({ token: state.token, user: state.user }), // Persist only token, saving the id would be a security risk
     }
   )
 );

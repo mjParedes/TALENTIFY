@@ -27,7 +27,12 @@ export const useLogin = () => {
       setUser(data.user);
       setToken(data.accessToken);
       toast.success("Inicio de sesión exitoso");
-      router.push("/dashboard");
+      if (data.user.role === "RECRUITER") {
+        router.push("/home/recruiters");
+      }
+      if (data.user.role === "USER") {
+        router.push("/home/users");
+      }
     },
     onError: (err) => {
       console.error(err);

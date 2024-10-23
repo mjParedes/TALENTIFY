@@ -26,7 +26,9 @@ export function NavUserSection({ isRecruiter }: NavUserSectionProps) {
               className="border-none text-purple-900 hover:text-purple-700"
               asChild
             >
-              <Link href={"/recruiters/publish-offer"}>Publicar empleo</Link>
+              <Link href={"/home/recruiters/publish-offer"}>
+                Publicar empleo
+              </Link>
             </Button>
           )}
           <div className="relative">

@@ -52,7 +52,6 @@ export function RegisterForm() {
       <InputField
         name="email"
         placeholder="Correo electrónico"
-        label="Introduce tu email"
         register={register}
         errors={errors}
       >
@@ -62,7 +61,6 @@ export function RegisterForm() {
       <InputField
         name="fullName"
         placeholder="Nombre y Apellido"
-        label="Introduce tu nombre completo"
         register={register}
         errors={errors}
       >
@@ -72,7 +70,6 @@ export function RegisterForm() {
       <InputField
         name="password"
         placeholder="Contraseña"
-        label="Introduce tu contraseña"
         type="password"
         register={register}
         errors={errors}
@@ -83,7 +80,6 @@ export function RegisterForm() {
       <InputField
         name="passwordConfirmation"
         placeholder="Confirme su contraseña"
-        label="Repite tu contraseña"
         type="password"
         register={register}
         errors={errors}
