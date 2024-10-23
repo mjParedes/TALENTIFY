@@ -44,7 +44,6 @@ export function LoginForm() {
       <InputField
         name="email"
         placeholder="Correo electrónico"
-        label="Introduce tu email"
         register={register}
         errors={errors}
       >
@@ -55,7 +54,6 @@ export function LoginForm() {
         name="password"
         type={"password"}
         placeholder="Contraseña"
-        label="Introduce tu contraseña"
         register={register}
         errors={errors}
       >
