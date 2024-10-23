@@ -12,13 +12,15 @@ export function useRedirectToHomeByRole() {
     }
     if (
       userRole === "RECRUITER" &&
-      window?.location?.pathname.startsWith("/home/users")
+      (window?.location?.pathname === "/home" ||
+        window?.location?.pathname.startsWith("/home/users"))
     ) {
       router.push("/home/recruiters");
     }
     if (
       userRole === "USER" &&
-      window?.location?.pathname.startsWith("/home/recruiters")
+      (window?.location?.pathname === "/home" ||
+        window?.location?.pathname.startsWith("/home/recruiters"))
     ) {
       router.push("/home/users");
     }
