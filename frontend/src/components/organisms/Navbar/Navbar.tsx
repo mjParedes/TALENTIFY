@@ -10,6 +10,8 @@ export function Navbar() {
   const user = useUserStore((state) => state.user);
   const isRecruiter = user?.role === "RECRUITER";
 
+  const homePathByRole = isRecruiter ? "/home/recruiters" : "/home/users";
+
   return (
     <header
       className={cn(
@@ -19,7 +21,7 @@ export function Navbar() {
     >
       <div className="mx-auto flex w-[95%] max-w-7xl justify-between py-4">
         <Link
-          href={"/"}
+          href={user ? homePathByRole : "/"}
           className="flex h-[inherit] items-center text-center text-2xl font-bold text-purple-700"
         >
           <PageLogo isRecruiter={isRecruiter} />
