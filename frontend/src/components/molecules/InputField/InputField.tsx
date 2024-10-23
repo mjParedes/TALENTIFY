@@ -9,12 +9,16 @@ import type {
   Path,
   UseFormRegister,
 } from "react-hook-form";
+import { cn } from "@/utils/cn";
 import { Input } from "../../atoms/Input/Input";
+import { Label } from "../../atoms/Label/Label";
 
 interface InputProps<T extends FieldValues>
   extends InputHTMLAttributes<HTMLInputElement> {
-  label: string;
+  label?: string;
   name: Path<T>;
+  fieldStyles?: string;
+  arrayErrorMessage?: string;
   register: UseFormRegister<T>;
   errors?: FieldErrors<T>;
   children?: React.ReactNode;
@@ -24,17 +28,25 @@ export function InputField<T extends FieldValues>({
   name,
   register,
   errors,
+  label,
   type = "text",
+  fieldStyles,
+  arrayErrorMessage,
   children,
   ...props
 }: InputProps<T>) {
-  const isError = !!errors?.[name];
-  const errorMessage = String(errors?.[name]?.message);
+  const isError = !!arrayErrorMessage || !!errors?.[name];
+  const errorMessage = arrayErrorMessage ?? String(errors?.[name]?.message);
   const [showPassword, setShowPassword] = useState(false);
   const showText = showPassword ? "text" : "password";
 
   return (
-    <fieldset className="relative mx-4 mb-4 w-full">
+    <fieldset className={cn("relative mx-4 mb-4 w-full", fieldStyles)}>
+      {label && (
+        <Label htmlFor={name} className="mb-2">
+          {label}
+        </Label>
+      )}
       <div className="relative flex items-center">
         {children && (
           <div className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400">
@@ -46,6 +58,7 @@ export function InputField<T extends FieldValues>({
           type={type === "password" ? showText : type}
           {...register(name)}
           variant="primary"
+          className={!!children ? "px-10" : ""} //with icon
           sizes="large"
           isError={isError}
           aria-invalid={isError}
