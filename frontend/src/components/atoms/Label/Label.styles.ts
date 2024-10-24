@@ -1,11 +1,10 @@
 import { cva } from "class-variance-authority";
 
-export const labelVariants = cva("block text-xs pl-4 pt-2 w-full max-w-[406px]", {
+export const labelVariants = cva("block w-full text-xs leading-[normal]", {
   variants: {
     variant: {
-      default: "text-[#626262]",
-      primary:"text-[#6650D3]",
-      link: "text-[#6650D3] underline decoration-solid text-sm"
+      default: "text-base font-normal text-grey-darkFont",
+      primary: "text-violet-600",
     },
   },
   defaultVariants: {

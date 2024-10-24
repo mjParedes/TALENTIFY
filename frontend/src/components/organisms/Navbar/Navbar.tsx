@@ -1,17 +1,32 @@
+"use client";
+
 import Link from "next/link";
-import { NavAuthButtons } from "@/components/molecules/NavAuthButtons/NavAuthButtons";
+import { useUserStore } from "@/store/auth.store";
+import { cn } from "@/utils/cn";
+import { PageLogo } from "../../atoms/PageLogo/PageLogo";
+import { NavUserSection } from "../NavUserSection/NavUserSection";
 
 export function Navbar() {
+  const user = useUserStore((state) => state.user);
+  const isRecruiter = user?.role === "RECRUITER";
+
+  const homePathByRole = isRecruiter ? "/home/recruiters" : "/home/users";
+
   return (
-    <header className="flex w-full items-center bg-slate-400">
-      <div className="mx-auto flex w-full max-w-6xl justify-between px-6 py-4 sm:px-12">
+    <header
+      className={cn(
+        "flex w-full items-center border-b border-grey-400 bg-white",
+        isRecruiter && "bg-violet-900"
+      )}
+    >
+      <div className="mx-auto flex w-[95%] max-w-7xl justify-between py-4">
         <Link
-          href={"/"}
+          href={user ? homePathByRole : "/"}
           className="flex h-[inherit] items-center text-center text-2xl font-bold text-purple-700"
         >
-          Talentify
+          <PageLogo isRecruiter={isRecruiter} />
         </Link>
-        <NavAuthButtons />
+        <NavUserSection isRecruiter={isRecruiter} />
       </div>
     </header>
   );

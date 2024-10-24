@@ -28,6 +28,7 @@ export const registerSchema = z
     email: emailSchema,
     password: passwordSchema,
     passwordConfirmation: passwordSchema,
+    isRecruiter: z.boolean(),
   })
   .refine((data) => data.password === data.passwordConfirmation, {
     message: "Las contraseñas no coinciden",

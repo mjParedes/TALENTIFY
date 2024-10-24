@@ -15,7 +15,7 @@ export const Label: FC<LabelProps> = ({
       htmlFor={htmlFor}
       className={cn(
         labelVariants({ variant, className }),
-        isError && "text-[#DA0000]"
+        isError && "text-red-alert"
       )}
       {...props}
     />

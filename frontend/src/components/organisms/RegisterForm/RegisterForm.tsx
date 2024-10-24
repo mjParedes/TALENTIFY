@@ -1,13 +1,17 @@
 "use client";
 
+import Link from "next/link";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { User, Mail, Lock } from "lucide-react";
+import { Lock, Mail, User } from "lucide-react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { type z } from "zod";
-import { Label } from "@/components/atoms/Label/Label";
-import { registerSchema } from "../../../validations/auth.schema";
-import { Button } from "../../atoms/Button/Button";
-import { InputField } from "../../molecules/InputField/InputField";
+import { Button } from "@/components/atoms/Button/Button";
+import { Spinner } from "@/components/atoms/Spinner/Spinner";
+import { Text } from "@/components/atoms/Text/Text";
+import { CheckInputField } from "@/components/molecules/CheckInputField/CheckInputField";
+import { InputField } from "@/components/molecules/InputField/InputField";
+import { useSignUp } from "@/services/mutations/auth-mutations";
+import { registerSchema } from "@/validations/auth.schema";
 
 type RegisterFormValues = z.infer<typeof registerSchema>;
 
@@ -17,28 +21,37 @@ export function RegisterForm() {
     handleSubmit,
     formState: { errors },
   } = useForm<RegisterFormValues>({ resolver: zodResolver(registerSchema) });
+  const signUp = useSignUp();
 
-  const onSubmit: SubmitHandler<RegisterFormValues> = (data) => {
-    console.log(data);
+  const onSubmit: SubmitHandler<RegisterFormValues> = ({
+    passwordConfirmation: _,
+    isRecruiter,
+    ...data
+  }) => {
+    signUp.mutate({ ...data, role: isRecruiter ? "RECRUITER" : "USER" });
   };
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex w-full max-w-[406px] flex-col items-center px-4"
+      className="flex w-full max-w-[27.375rem] flex-col items-center px-4 pb-10"
     >
-      <div className="w-full max-w-[406px]">
-        <legend className="mb-4 text-left text-2xl font-bold text-[#212121]">
+      <div className="w-full max-w-[25.375rem]">
+        <Text variant="Headline-2/24" className="mb-4" element="legend">
           Crear cuenta
-        </legend>
-        <p className="mb-4 text-left text-[14px] text-[#212121]">
+        </Text>
+        <Text variant="Paragraph-2/14" className="mb-4">
           Completa tu perfil y accede a las mejores vacantes del mercado
           laboral, todo en un solo lugar.
-        </p>
+        </Text>
       </div>
+      <CheckInputField name="isRecruiter" register={register} errors={errors}>
+        Quiero crear una cuenta como{" "}
+        <span className="text-violet-600">reclutador</span>
+      </CheckInputField>
       <InputField
         name="email"
         placeholder="Correo electrónico"
-        label="Introduce tu email"
         register={register}
         errors={errors}
       >
@@ -48,7 +61,6 @@ export function RegisterForm() {
       <InputField
         name="fullName"
         placeholder="Nombre y Apellido"
-        label="Introduce tu nombre completo"
         register={register}
         errors={errors}
       >
@@ -58,7 +70,6 @@ export function RegisterForm() {
       <InputField
         name="password"
         placeholder="Contraseña"
-        label="Introduce tu contraseña"
         type="password"
         register={register}
         errors={errors}
@@ -69,7 +80,6 @@ export function RegisterForm() {
       <InputField
         name="passwordConfirmation"
         placeholder="Confirme su contraseña"
-        label="Repite tu contraseña"
         type="password"
         register={register}
         errors={errors}
@@ -77,24 +87,30 @@ export function RegisterForm() {
         <Lock />
       </InputField>
 
-      <Button type="submit" variant="primary" size="large">
-        Crear cuenta
+      <Button
+        type="submit"
+        variant="primary"
+        size="large"
+        disabled={signUp.isPending}
+        className="h-12"
+      >
+        {signUp.isPending ? <Spinner className="h-7 w-7" /> : "Crear cuenta"}
       </Button>
-      <div className="my-10 w-full max-w-[406px] border-b-[1px] border-solid border-[#8A8A8A]"></div>
-      <Label variant="link" className="mb-10 text-center">
-        <a href={"/login"}>¿Ya tienes una cuenta? Inicia sesión</a>
-      </Label>
-      <div>
-        <legend className="text-[12px] text-[#212121]">
+      <div className="my-6 w-full max-w-[406px] border-b border-solid border-grey-500"></div>
+      <Link href={"/login"} className="mb-6 text-center">
+        <Text variant="link">¿Ya tienes una cuenta? Inicia sesión</Text>
+      </Link>
+      <div className="text-center">
+        <Text variant="Paragraph-3/12">
           Al continuar, confirmas tu conformidad con nuestras 
-          <a className="text-[#6650D3] underline decoration-solid" href="">
+          <span className="text-violet-600 underline decoration-solid">
             Condiciones de Uso
-          </a>
+          </span>{" "}
           y que leíste nuestra 
-          <a className="text-[#6650D3] underline decoration-solid" href="">
+          <span className="text-violet-600 underline decoration-solid">
             Declaración de Privacidad y Cookies.
-          </a>
-        </legend>
+          </span>
+        </Text>
       </div>
     </form>
   );

@@ -1,26 +1,30 @@
 import { cva } from "class-variance-authority";
 
 export const buttonVariants = cva(
-  "rounded-[16px] border flex font-medium items-center justify-center text-base",
+  "flex items-center justify-center rounded-2xl text-base font-medium leading-5 transition-all duration-300",
   {
     variants: {
       variant: {
         default: "",
         primary:
-          "border-solid border-[#6650D3] bg-[#6650D3] hover:bg-[#8D79ED] hover:border-[#8D79ED] active:bg-[#503EA5] active:border-[#503EA5] text-white",
+          "bg-violet-600 text-white hover:bg-violet-400 active:bg-violet-700",
         secondary:
-          "border-solid border-[#3A3A3A] bg-[#3A3A3A] hover:bg-[#7E7E7E] hover:border-[#7E7E7E] active:bg-[#4C4C4C] active:border-[#4C4C4C] text-white",
-        disabled:
-          "pointer-events-none bg-[#C9C9C9] border-solid border-[#C9C9C9]",
+          "bg-grey-900 text-white hover:bg-grey-600 active:bg-grey-800",
+        disabled: "pointer-events-none border-solid bg-grey-200",
         outlinedDisabled:
-          "pointer-events-none border-solid border-2 border-[#8A8A8A] text-[#8A8A8A]",
-        outlined: 
-          "border-solid border-2 border-[#8A8A8A] text-[#212121] hover:bg-[#DBDBDB] active:bg-[#8A8A8A] active:text-white",
+          "pointer-events-none border-2 border-solid border-grey-500 text-grey-500",
+        outlined:
+          "border-2 border-solid border-grey-500 bg-white py-1 text-grey-darkFont hover:bg-grey-100 active:bg-grey-500 active:text-white",
+        textWithIcon:
+          "border-none bg-white text-base font-medium text-violet-900 hover:bg-violet-50 active:bg-violet-200",
+        textWithIconDisabled: "bg-white text-grey-500",
       },
+
       size: {
         default: "",
-        small: "py-[11px] w-[130px]",
-        large: "py-[14px] w-full m-w-[406px]",
+        small: "px-4 py-2.5",
+        medium: "px-4 py-3",
+        large: "w-full py-3.5",
       },
     },
     defaultVariants: {

@@ -42,7 +42,8 @@ const responseText = `
              "email": "string (required)",
              "category": "string (required)",
              "website": "string (optional)",
-             "country": "string (required)"
+             "country": "string (required)",
+             "imageUrl": "string (optional)"
            }
          },
          "getById": {
@@ -54,7 +55,7 @@ const responseText = `
          },
          "delete": {
            "method": "DELETE",
-            "url": "/api/company/{:id}",
+           "url": "/api/company/{:id}",
            "request": {
              "id": "number (required)"
            }
@@ -73,7 +74,7 @@ const responseText = `
              "about": "string (required)",
              "phone": "string (required)",
              "resume": "string (required)",
-             "address": "string (required)"
+             "userId": "number (required)"
            }
          },
          "getById": {
@@ -103,7 +104,7 @@ const responseText = `
            "request": {
              "title": "string (required)",
              "description": "string (required)",
-             "owner": "number (required)",
+             "ownerId": "number (required)",
              "salary": "string (required)",
              "requirements": "string (required)",
              "location": "string (required)",
@@ -113,15 +114,74 @@ const responseText = `
          },
          "getById": {
            "method": "GET",
+           "url": "/api/offers/{:id}",
            "request": {
-             "url": "/api/offers/{:id}",
              "id": "number (required)"
            }
          },
          "delete": {
            "method": "DELETE",
+           "url": "/api/offers/{:id}",
            "request": {
-             "url": "/api/offers/{:id}",
+             "id": "number (required)"
+           }
+         }
+       }
+       </pre><br>
+
+  5. /api/applications<br>
+     - Description: Application management (create, read, delete applications)<br>
+     - Methods:
+       <pre>
+       {
+         "create": {
+           "method": "POST",
+           "request": {
+             "userId": "number (required)",
+             "offerId": "number (required)",
+             "status": "string (required, valid values: APPLIED, REVIEWED, INTERVIEW, OFFER, REJECTED)"
+           }
+         },
+         "getById": {
+           "method": "GET",
+           "url": "/api/applications/{:id}",
+           "request": {
+             "id": "number (required)"
+           }
+         },
+         "delete": {
+           "method": "DELETE",
+           "url": "/api/applications/{:id}",
+           "request": {
+             "id": "number (required)"
+           }
+         }
+       }
+       </pre><br>
+  
+  6. /api/favorites<br>
+     - Description: Favorites management (create, read, delete favorites)<br>
+     - Methods:
+       <pre>
+       {
+         "create": {
+           "method": "POST",
+           "request": {
+             "userId": "number (required)",
+             "offerId": "number (required)"
+           }
+         },
+         "getById": {
+           "method": "GET",
+           "url": "/api/favorites/{:id}",
+           "request": {
+             "id": "number (required)"
+           }
+         },
+         "delete": {
+           "method": "DELETE",
+           "url": "/api/favorites/{:id}",
+           "request": {
              "id": "number (required)"
            }
          }
@@ -131,4 +191,3 @@ const responseText = `
 `;
 
 export default responseText;
-
