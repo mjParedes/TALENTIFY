@@ -35,6 +35,7 @@ app.use('/api/profiles', profileRoute)
 app.use('/api/applications', applicationRoute)
 app.use('/api/experience', experienceRoute)
 app.use('/api/favorites', favoriteRoute)
+app.use('/api/studies', studiesRoute)
 
 app.get("/api/", (req, res) => {
   res.send(responseText);
