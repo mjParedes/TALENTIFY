@@ -1,0 +1,22 @@
+import { CompanyDetails } from "@/components/molecules/CompanyDetails/CompanyDetails";
+import { JobDescription } from "@/components/molecules/JobDescription/JobDescription";
+import { ShareSaveButton } from "@/components/molecules/ShareSaveButtons/ShareSaveButton";
+import { JobRequirements } from "../../molecules/JobRequirements/JobRequirements";
+import { OfferResume } from "../OfferResume/OfferResume";
+
+export const OfferDescription = () => {
+  return (
+    <div className="flex max-h-[700px] w-full max-w-[827px] flex-col overflow-scroll rounded-3xl border-[1px] border-gray-400 p-6">
+      <div className="relative flex w-full items-start justify-between">
+        <OfferResume />
+        <ShareSaveButton />
+      </div>
+      <hr />
+      <div className="mt-8">
+        <JobDescription />
+        <JobRequirements />
+        <CompanyDetails />
+      </div>
+    </div>
+  );
+};
