@@ -1,13 +1,15 @@
 "use client";
 
+import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Plus, Trash } from "lucide-react";
+import { Plus } from "lucide-react";
 import {
   Controller,
   useFieldArray,
   useForm,
   type SubmitHandler,
 } from "react-hook-form";
+import { toast } from "sonner";
 import { type z } from "zod";
 import { Button } from "@/components/atoms/Button/Button";
 import {
@@ -31,6 +33,7 @@ type JobPostFormValues = z.infer<typeof jobPostSchema>;
 const defaultRequirements = [{ description: "" }, { description: "" }];
 
 export function JobPostForm() {
+  const [isLoading, setIsLoading] = useState(false);
   const {
     register,
     handleSubmit,
@@ -49,8 +52,12 @@ export function JobPostForm() {
   });
 
   const onSubmit: SubmitHandler<JobPostFormValues> = (data) => {
+    setIsLoading(true);
+    setTimeout(() => {
+      toast.success("Publicación creada exitosamente");
+      setIsLoading(false);
+    }, 800);
     console.log(data);
-    console.log(errors);
   };
 
   return (
@@ -223,7 +230,7 @@ export function JobPostForm() {
           {fields.map((field, index) => {
             const error = errors?.requirements?.[index]?.description;
             return (
-              <div key={field.id} className="flex items-center">
+              <div key={field.id}>
                 <InputField
                   name={`requirements.${index}.description`}
                   placeholder="Ej. Conocimiento en React"
@@ -231,17 +238,19 @@ export function JobPostForm() {
                   register={register}
                   errors={errors}
                   arrayErrorMessage={error?.message}
-                  fieldStyles="mx-0"
+                  fieldStyles="mx-0 mb-0"
                 />
-                <Button
-                  type="button"
-                  variant="default"
-                  className="ml-3 mt-3.5 rounded-full border border-red-alert p-2 text-red-alert opacity-70 disabled:border-grey-400 disabled:text-gray-400"
-                  onClick={() => fields.length > 2 && remove(index)}
-                  disabled={fields.length <= 2}
-                >
-                  <Trash size={20} />
-                </Button>
+                <div className="mt-3 flex w-full justify-end">
+                  <Button
+                    type="button"
+                    variant="textOnly"
+                    className="py-1"
+                    onClick={() => fields.length > 2 && remove(index)}
+                    disabled={fields.length <= 2}
+                  >
+                    Eliminar requerimiento
+                  </Button>
+                </div>
               </div>
             );
           })}
@@ -286,7 +295,7 @@ export function JobPostForm() {
         size="large"
         className="mt-4 h-12"
       >
-        {false ? <Spinner className="h-7 w-7" /> : "Publicar ahora"}
+        {isLoading ? <Spinner className="h-7 w-7" /> : "Publicar ahora"}
       </Button>
     </form>
   );
