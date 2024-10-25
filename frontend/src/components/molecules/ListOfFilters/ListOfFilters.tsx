@@ -4,7 +4,7 @@ export const ListOfFilters = () => {
   return (
     <div className="mt-4">
       <Filter className="mr-4" variant="selected" selected>
-        Presencial
+        Remoto
       </Filter>
       <Filter className="mr-4" variant="default" filterMenu>
         Tipo de contrato
