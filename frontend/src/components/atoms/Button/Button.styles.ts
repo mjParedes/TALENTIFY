@@ -18,6 +18,8 @@ export const buttonVariants = cva(
         textWithIcon:
           "border-none bg-white text-base font-medium text-violet-900 hover:bg-violet-50 active:bg-violet-200",
         textWithIconDisabled: "bg-white text-grey-500",
+        textOnly:
+          "text-sm text-violet-600 underline opacity-70 hover:text-violet-700 disabled:border-grey-400 disabled:text-gray-400",
       },
 
       size: {
