@@ -1,7 +1,7 @@
 "use client";
 
 import { zodResolver } from "@hookform/resolvers/zod";
-import { Plus, Trash } from "lucide-react";
+import { Plus } from "lucide-react";
 import {
   Controller,
   useFieldArray,
@@ -223,7 +223,7 @@ export function JobPostForm() {
           {fields.map((field, index) => {
             const error = errors?.requirements?.[index]?.description;
             return (
-              <div key={field.id} className="flex items-center">
+              <div key={field.id}>
                 <InputField
                   name={`requirements.${index}.description`}
                   placeholder="Ej. Conocimiento en React"
@@ -231,17 +231,19 @@ export function JobPostForm() {
                   register={register}
                   errors={errors}
                   arrayErrorMessage={error?.message}
-                  fieldStyles="mx-0"
+                  fieldStyles="mx-0 mb-0"
                 />
-                <Button
-                  type="button"
-                  variant="default"
-                  className="ml-3 mt-3.5 rounded-full border border-red-alert p-2 text-red-alert opacity-70 disabled:border-grey-400 disabled:text-gray-400"
-                  onClick={() => fields.length > 2 && remove(index)}
-                  disabled={fields.length <= 2}
-                >
-                  <Trash size={20} />
-                </Button>
+                <div className="mt-3 flex w-full justify-end">
+                  <Button
+                    type="button"
+                    variant="textOnly"
+                    className="py-1"
+                    onClick={() => fields.length > 2 && remove(index)}
+                    disabled={fields.length <= 2}
+                  >
+                    Eliminar requerimiento
+                  </Button>
+                </div>
               </div>
             );
           })}
