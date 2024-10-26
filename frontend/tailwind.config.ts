@@ -61,6 +61,9 @@ const config: Config = {
         "7xl": "78.125rem",
         "8xl": "90rem",
       },
+      screens: {
+        xs: "25rem",
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],
