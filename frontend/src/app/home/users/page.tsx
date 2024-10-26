@@ -1,14 +1,24 @@
 "use client";
 
-import { WelcomeMessage } from "@/components/molecules/WelcomeMessage/WelcomeMessage";
+import { ListOfFilters } from "@/components/molecules/ListOfFilters/ListOfFilters";
+import { SearchBar } from "@/components/molecules/SearchBar/SearchBar";
+import { ListOfCardOffer } from "@/components/organisms/ListOfCardsOffer/ListOfCardOffer";
+import { OfferDescription } from "@/components/organisms/OfferDescription/OfferDescription";
 import { useRedirectToHomeByRole } from "@/hooks/useRedirectToHomeByRole";
 
-export default function RecruitersHome() {
+const Jobs = () => {
   useRedirectToHomeByRole();
 
   return (
-    <div className="flex w-full justify-center pt-[15%]">
-      <WelcomeMessage />
+    <div className="m-auto max-w-[1248px]">
+      <SearchBar />
+      <ListOfFilters />
+      <div className="mt-9 flex justify-center">
+        <ListOfCardOffer />
+        <OfferDescription />
+      </div>
     </div>
   );
-}
+};
+
+export default Jobs;
