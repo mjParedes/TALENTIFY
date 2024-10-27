@@ -55,6 +55,52 @@ export class AuthController {
 
     return res.status(200).json({ accessToken, user: safeUser });
   }
+
+  // Mostrar info del User con Token
+  public async getUserFromToken(req: Request, res: Response): Promise<Response> {
+    const token = req.headers.authorization?.split(" ")[1]; // Extract the token from the "Bearer" header
+
+    if (!token) {
+      return res.status(401).json({ message: "Authorization token is missing" });
+    }
+
+    try {
+      // Verificar el token y obtener los datos del usuario
+      const decodedToken = await this.authService.verifyToken(token);
+      
+      // Asumimos que el ID de usuario está en el token decodificado
+      const userId = decodedToken.sub; 
+
+      // Buscar al usuario en la base de datos
+      // const user = userId;
+      // console.log(decodedToken.sub)
+      const user = await prisma.users.findUnique({
+        where: { id: Number(userId) },
+        select: {
+          id: true,
+          email: true,
+          fullName: true,
+          role: true,
+        }
+      });
+
+      if (!user) {
+        return res.status(404).json({ message: "User not found" });
+      }
+
+      return res.status(200).json({ user });
+
+    } catch (error) {
+      if (error instanceof Error) {
+        return res.status(401).json({ message: "Invalid or expired token", error: error.message });
+      } else {
+        return res.status(401).json({ message: "Unknown error occurred" });
+      }
+    }
+  }
 }
+
+
+
 
 
