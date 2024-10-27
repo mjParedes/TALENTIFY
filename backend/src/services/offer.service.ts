@@ -41,7 +41,7 @@ export class OfferService {
     }
 
     public async update(id: number, updateData: Partial<CreateOfferDto>) {
-        const { title, description, ownerId, salary, requirements, location, modality, status, creationDate, applications } = updateData;
+        const { title, description, ownerId, salary, requirements, location, companyName, companyDescription, contractType, workDay, modality, status, creationDate, applications } = updateData;
     
         return prisma.offers.update({
             where: { id },
@@ -53,6 +53,10 @@ export class OfferService {
                 requirements,
                 location,
                 modality,
+                contractType,
+                workDay,
+                companyName,
+                companyDescription,
                 status,
                 creationDate: creationDate || new Date(),
                 applications: applications
