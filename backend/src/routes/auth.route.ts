@@ -17,5 +17,7 @@ router.post("/signup", asyncHandler((req: any, res: any) => authController.signu
 
 router.post("/login", asyncHandler((req: any, res: any) => authController.login(req, res)));
 
+router.get("/me", asyncHandler((req: any, res: any) => authController.getUserFromToken(req, res)));
+
 export default router;
 
