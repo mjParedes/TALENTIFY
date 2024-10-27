@@ -37,6 +37,22 @@ export class CreateOfferDto {
   @IsNotEmpty()
   modality: string;
 
+  @IsString()
+  @IsNotEmpty()
+  contractType: string;
+
+  @IsString()
+  @IsNotEmpty()
+  workDay: string;
+
+  @IsString()
+  @IsNotEmpty()
+  companyName: string;
+
+  @IsString()
+  @IsNotEmpty()
+  companyDescription: string;
+
   @IsEnum(OfferStatus)
   @IsNotEmpty()
   status: OfferStatus;
@@ -52,7 +68,7 @@ export class CreateOfferDto {
   }[]; 
 
   constructor(
-    id: number, title: string, description: string, ownerId: number, salary: string, requirements: string, location: string, modality: string, status: OfferStatus, creationDate: Date, applications: { userId: number, status: ApplicationStatus }[]) {
+    id: number, title: string, description: string, ownerId: number, salary: string, requirements: string, location: string, modality: string, contractType: string, workDay: string, companyName: string, companyDescription: string, status: OfferStatus, creationDate: Date, applications: { userId: number, status: ApplicationStatus }[]) {
     this.id = id;
     this.title = title;
     this.description = description;
@@ -61,6 +77,10 @@ export class CreateOfferDto {
     this.requirements = requirements;
     this.location = location;
     this.modality = modality;
+    this.contractType = contractType;
+    this.workDay = workDay;
+    this.companyName = companyName;
+    this.companyDescription = companyDescription;
     this.status = status;
     this.creationDate = creationDate;
     this.applications = applications;
