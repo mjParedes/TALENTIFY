@@ -17,7 +17,8 @@ paths:
           description: User registered successfully
           content:
             application/json:
-              schema: $ref:"#/components/schemas/SignupResponse"
+              schema:
+                $ref: "#/components/schemas/SignupResponse"
         "400":
           description: Bad request, validation error
         "500":
@@ -39,7 +40,8 @@ paths:
           description: User logged in successfully
           content:
             application/json:
-              schema: $ref:"#/components/schemas/LoginResponse"
+              schema:
+                $ref: "#/components/schemas/LoginResponse"
         "400":
           description: Invalid credentials
         "500":
@@ -680,7 +682,222 @@ paths:
           description: Application not found
         "500":
           description: Internal server error
+  /api/favorites:
+    get:
+      summary: Get all favorites
+      description: Get all favorites
+      tags:
+        - Favorites
+      responses:
+        "200":
+          description: Favorites retrieved successfully
+          content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Favorites"
+        "500":
+          description: Internal server error
+    post:
+      summary: Add a favorite
+      description: Add a favorite
+      tags:
+        - Favorites
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Favorites"
+      responses:
+        "201":
+          description: Favorite created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Favorites"
+        "409":
+          description: Favorite already exists
+        "500":
+          description: Internal server error
+  /api/favorites/{id}:
+    get:
+      summary: Get a favorite by id
+      description: Get a favorite by id
+      tags:
+        - Favorites
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Favorite founded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Favorites"
+        "404":
+          description: Favorite not found
+        "500":
+          description: Internal server error
+    put:
+      summary: Update a favorite
+      description: Update a favorite
+      tags:
+        - Favorites
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Favorite updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Favorites"
+        "404":
+          description: Favorite not found
+        "500":
+          description: Internal server error
+    delete:
+      summary: Delete a favorite by ID
+      description: Delete a single favorite by id
+      tags:
+        - Favorites
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Favorite deleted
+          content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Favorites"
+        "404":
+          description: Favorite not found
+        "500":
+          description: Internal server error
+  /api/studies:
+    get:
+      summary: Get all studies
+      description: Get all studies
+      tags:
+        - Studies
+      responses:
+        "200":
+          description: Studies retrieved successfully
+          content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Studies"
+        "500":
+          description: Internal server error
+    post:
+      summary: Add a study
+      description: Add a study
+      tags:
+        - Studies
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Studies"
+      responses:
+        "201":
+          description: Study created successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Studies"
+        "409":
+          description: Study already exists
+        "500":
+          description: Internal server error
+  /api/studies/{id}:
+    get:
+      summary: Get a study by id
+      description: Get a study by id
+      tags:
+        - Studies
+      parameters:
+        - in: path
+          name: id
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Study founded
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Studies"
+        "404":
+          description: Study not found
+        "500":
+          description: Internal server error
+    put:
+      summary: Update a study
+      description: Update a study
+      tags:
+        - Studies
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Study updated successfully
+          content:
+            application/json:
+              schema:
+                $ref: "#/components/schemas/Studies"
+        "404":
+          description: Study not found
+        "500":
+          description: Internal server error
+    delete:
+      summary: Delete a study by ID
+      description: Delete a single study by id
+      tags:
+        - Studies
+      parameters:
+        - name: id
+          in: path
+          required: true
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Study deleted
+          content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/Studies"
+        "404":
+          description: Study not found
+        "500":
+          description: Internal server error
+security:
+  - bearerAuth: []
 components:
+  securitySchemes:
+    BearerAuth:
+      type: http
+      scheme: bearer
+      bearerFormat: JWT
   schemas:
     SignupRequest:
       type: object
