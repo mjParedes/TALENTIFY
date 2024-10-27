@@ -44,19 +44,23 @@ model Company {
 }
 
 model Offers {
-  id           Int           @id @default(autoincrement())
-  title        String
-  description  String
-  owner        Users         @relation(fields: [ownerId], references: [id])
-  ownerId      Int
-  salary       String
-  requirements String
-  location     String
-  modality     String
-  status       OfferStatus
-  creationDate DateTime      @default(now()) @map("creation_date")
-  applications Application[]
-  favorites    Favorites[]
+  id                 Int           @id @default(autoincrement())
+  title              String
+  description        String
+  owner              Users         @relation(fields: [ownerId], references: [id], onDelete: Cascade)
+  ownerId            Int
+  salary             String
+  requirements       String
+  location           String
+  modality           String
+  status             OfferStatus   @default(OPEN)
+  creationDate       DateTime      @default(now()) @map("creation_date")
+  contractType       String?       @default("Contrato fijo")
+  workDay            String?       @default("Tiempo completo")
+  companyName        String?       @default("Talentify")
+  companyDescription String?       @default("")
+  applications       Application[]
+  favorites          Favorites[]
 
   @@map("offers")
 }
@@ -68,7 +72,7 @@ enum OfferStatus {
 
 model Profile {
   id          Int          @id @default(autoincrement())
-  user        Users        @relation(fields: [userId], references: [id])
+  user        Users        @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId      Int          @unique
   about       String
   address     String
@@ -82,7 +86,7 @@ model Profile {
 
 model Experience {
   id           Int       @id @default(autoincrement())
-  profile      Profile   @relation(fields: [profileId], references: [id])
+  profile      Profile   @relation(fields: [profileId], references: [id], onDelete: Cascade)
   profileId    Int
   company_name String
   position     String
@@ -94,7 +98,7 @@ model Experience {
 
 model Studies {
   id               Int      @id @default(autoincrement())
-  profile          Profile  @relation(fields: [profileId], references: [id])
+  profile          Profile  @relation(fields: [profileId], references: [id], onDelete: Cascade)
   profileId        Int
   institution_name String
   degree           String
@@ -105,9 +109,9 @@ model Studies {
 
 model Application {
   id        Int               @id @default(autoincrement())
-  user      Users             @relation(fields: [userId], references: [id])
+  user      Users             @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    Int
-  offer     Offers            @relation(fields: [offerId], references: [id])
+  offer     Offers            @relation(fields: [offerId], references: [id], onDelete: Cascade)
   offerId   Int
   status    ApplicationStatus
   createdAt DateTime          @default(now()) @map("created_at")
@@ -125,9 +129,9 @@ enum ApplicationStatus {
 
 model Favorites {
   id        Int      @id @default(autoincrement())
-  user      Users    @relation(fields: [userId], references: [id])
+  user      Users    @relation(fields: [userId], references: [id], onDelete: Cascade)
   userId    Int
-  offer     Offers   @relation(fields: [offerId], references: [id])
+  offer     Offers   @relation(fields: [offerId], references: [id], onDelete: Cascade)
   offerId   Int
   createdAt DateTime @default(now()) @map("created_at")
 
