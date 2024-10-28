@@ -1,6 +1,5 @@
 "use client";
 
-import { useState } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Plus } from "lucide-react";
 import {
@@ -9,7 +8,6 @@ import {
   useForm,
   type SubmitHandler,
 } from "react-hook-form";
-import { toast } from "sonner";
 import { type z } from "zod";
 import { Button } from "@/components/atoms/Button/Button";
 import {
@@ -24,6 +22,8 @@ import {
 import { Spinner } from "@/components/atoms/Spinner/Spinner";
 import { Text } from "@/components/atoms/Text/Text";
 import { InputField } from "@/components/molecules/InputField/InputField";
+import { useCreateJobPost } from "@/services/mutations/jobposts-mutations";
+import { useUserStore } from "@/store/auth.store";
 import { jobPostSchema } from "@/validations/jobpost.schema";
 import { Label } from "../../atoms/Label/Label";
 import { TextAreaField } from "../../molecules/TextAreaField/TextAreaField";
@@ -33,7 +33,8 @@ type JobPostFormValues = z.infer<typeof jobPostSchema>;
 const defaultRequirements = [{ description: "" }, { description: "" }];
 
 export function JobPostForm() {
-  const [isLoading, setIsLoading] = useState(false);
+  const createPost = useCreateJobPost();
+  const user = useUserStore((state) => state.user);
   const {
     register,
     handleSubmit,
@@ -52,12 +53,15 @@ export function JobPostForm() {
   });
 
   const onSubmit: SubmitHandler<JobPostFormValues> = (data) => {
-    setIsLoading(true);
-    setTimeout(() => {
-      toast.success("Publicación creada exitosamente");
-      setIsLoading(false);
-    }, 800);
-    console.log(data);
+    if (!user?.id) return;
+    const reqData = {
+      ...data,
+      requirements: JSON.stringify(data.requirements.map((x) => x.description)),
+      ownerId: user.id,
+      salary: data.salary ?? "",
+      status: "OPEN" as const,
+    };
+    createPost.mutate(reqData);
   };
 
   return (
@@ -295,7 +299,11 @@ export function JobPostForm() {
         size="large"
         className="mt-4 h-12"
       >
-        {isLoading ? <Spinner className="h-7 w-7" /> : "Publicar ahora"}
+        {createPost.isPending ? (
+          <Spinner className="h-7 w-7" />
+        ) : (
+          "Publicar ahora"
+        )}
       </Button>
     </form>
   );
