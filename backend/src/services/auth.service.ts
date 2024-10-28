@@ -60,6 +60,16 @@ export class AuthService {
       user: { ...userWithRole, password: undefined },
     };
   }
+
+  // Verifica el token JWT y devuelve el payload decodificado.
+  public async verifyToken(token: string): Promise<jwt.JwtPayload> {
+    try {
+      const decoded = this.jwtInstance.verify(token, process.env.JWT_SECRET!);
+      return decoded as jwt.JwtPayload;
+    } catch (error) {
+      throw new Error("Invalid or expired token");
+    }
+  }
 }
 
 
