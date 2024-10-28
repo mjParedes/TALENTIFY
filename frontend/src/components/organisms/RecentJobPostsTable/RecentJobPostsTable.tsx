@@ -1,5 +1,5 @@
 import { Text } from "@/components/atoms/Text/Text";
-import { JobData, JobPostsTable } from "../JobPostsTable/JobPostsTable";
+import { JobPostsTable, type JobData } from "../JobPostsTable/JobPostsTable";
 
 const jobPostsMockData: JobData[] = [
   {

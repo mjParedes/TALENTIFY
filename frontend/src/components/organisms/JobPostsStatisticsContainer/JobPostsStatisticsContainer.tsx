@@ -1,7 +1,7 @@
 import { CircleCheck, CircleX, FileText } from "lucide-react";
 import {
   StatCard,
-  StatCardProps,
+  type StatCardProps,
 } from "@/components/molecules/StatCard/StatCard";
 
 const mockData: StatCardProps[] = [
@@ -27,7 +27,7 @@ const mockData: StatCardProps[] = [
 
 export function JobPostsStatisticsContainer() {
   return (
-    <div className="xs:justify-start xs:px-0 flex flex-wrap justify-center gap-4 px-4">
+    <div className="flex flex-wrap justify-center gap-4 px-4 xs:justify-start xs:px-0">
       {mockData.map((card, index) => (
         <StatCard key={index} {...card} />
       ))}
