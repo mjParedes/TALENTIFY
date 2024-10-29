@@ -31,6 +31,25 @@ export class OfferService {
         return prisma.offers.findMany()
     }
 
+    public async getFiltered(status: string, page: number, limit: number) {
+        const skip = (page - 1) * limit
+        const where = status ? { status: status === 'active' ? OfferStatus.OPEN : OfferStatus.CLOSED } : {}
+
+        const offers = await prisma.offers.findMany({
+            where,
+            skip,
+            take: limit
+        })
+
+        const totalOffers = await prisma.offers.count({ where })
+
+        return {
+            offers,
+            totalPages: Math.ceil(totalOffers / limit),
+            currentPage: page
+        }
+    }
+
     public async getById(id: number) {
         return prisma.offers.findUnique({
             where: { id }
@@ -39,7 +58,7 @@ export class OfferService {
 
     public async update(id: number, updateData: Partial<CreateOfferDto>) {
         const { title, description, ownerId, salary, requirements, location, modality, status, creationDate, applications } = updateData;
-    
+
         return prisma.offers.update({
             where: { id },
             data: {
@@ -64,7 +83,7 @@ export class OfferService {
             }
         });
     }
-    
+
 
     public async delete(id: number) {
         return prisma.offers.delete({

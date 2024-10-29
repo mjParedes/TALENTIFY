@@ -25,6 +25,19 @@ export class OfferController {
         }
     }
 
+    public async getFilteredOffers(req: Request, res: Response): Promise<void> {
+        const status = req.query.status as string
+        const page = parseInt(req.query.page as string) || 1
+        const limit = parseInt(req.query.limit as string) 
+
+        try {
+            const offers = await offerService.getFiltered(status, page, limit)
+            res.status(200).json(offers)
+        } catch (error: any) {
+            res.status(500).json({ error: 'Error fetching offers' })
+        }
+    }
+
     public async getOfferById(req: Request, res: Response): Promise<void> {
         try {
             const id = parseInt(req.params.id)
