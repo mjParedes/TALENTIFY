@@ -15,7 +15,7 @@ export const SearchBar = () => {
           <div>Ubicación</div>
         </div>
       </div>
-      <Button>Buscar empleo</Button>
+      <Button className="min-w-max">Buscar empleo</Button>
     </div>
   );
 };

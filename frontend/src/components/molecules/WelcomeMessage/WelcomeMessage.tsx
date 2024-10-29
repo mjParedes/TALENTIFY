@@ -3,16 +3,11 @@
 import { useUserStore } from "@/store/auth.store";
 import { Text } from "../../atoms/Text/Text";
 
-interface WelcomeMessageProps {
-  isRecruiter?: boolean;
-}
-
-export function WelcomeMessage({ isRecruiter = false }: WelcomeMessageProps) {
+export function WelcomeMessage() {
   const user = useUserStore((state) => state.user);
   return (
     <Text variant="Headline-1/32">
-      Bienvenido {isRecruiter ? "reclutador" : ""}{" "}
-      {user ? user.fullName : "Usuario"}
+      Bienvenido {user ? user.fullName.split(" ") : "Usuario"}!
     </Text>
   );
 }

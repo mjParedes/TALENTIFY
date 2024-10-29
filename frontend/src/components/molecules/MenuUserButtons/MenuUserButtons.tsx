@@ -4,7 +4,7 @@ import { Button } from "@/components/atoms/Button/Button";
 
 export const MenuUserButtons = () => {
   return (
-    <div className="h-full w-full border-b-[1px] border-t-[1px] border-gray-500 pt-4">
+    <div className="h-full w-full border-t border-gray-500 pt-4">
       <Button
         variant="textWithIcon"
         size="medium"

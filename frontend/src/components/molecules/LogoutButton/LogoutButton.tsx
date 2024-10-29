@@ -9,7 +9,7 @@ export const LogoutButton = () => {
   const logOut = useLogout();
   const closeMenu = useUserMenuStore((state) => state.closeMenu);
   return (
-    <div className="flex w-full flex-col items-center">
+    <div className="flex w-full flex-col items-center border-t border-gray-500">
       <Button
         variant="textWithIcon"
         size="medium"

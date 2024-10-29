@@ -7,10 +7,12 @@ import { InfoUser } from "@/components/molecules/InfoUser/InfoUser";
 import { LogoutButton } from "@/components/molecules/LogoutButton/LogoutButton";
 import { MenuUserButtons } from "@/components/molecules/MenuUserButtons/MenuUserButtons";
 import { useClickOutside } from "@/hooks/useClickOutside";
+import { useUserStore } from "@/store/auth.store";
 import { useUserMenuStore } from "@/store/userMenu.store";
 
 export const UserMenu = () => {
   const closeMenu = useUserMenuStore((state) => state.closeMenu);
+  const isUser = useUserStore((state) => state.user?.role === "USER");
 
   const handleClickOutsideOrEscape = useCallback(() => {
     closeMenu();
@@ -21,13 +23,13 @@ export const UserMenu = () => {
   return (
     <div
       ref={ref}
-      className="absolute -right-3 top-14 z-10 flex h-full w-full flex-col items-start justify-between rounded-3xl bg-white p-4 md:h-[28.875rem] md:w-[21.25rem] md:border-[1px] md:border-solid md:border-gray-500"
+      className="absolute -right-3 top-14 z-10 flex w-full flex-col items-start justify-between rounded-3xl bg-white p-4 md:w-[21.25rem] md:border md:border-solid md:border-gray-500"
     >
       <Link className="self-end text-gray-900 md:hidden" href="/">
         <X />
       </Link>
       <InfoUser />
-      <MenuUserButtons />
+      {isUser && <MenuUserButtons />}
       <LogoutButton />
     </div>
   );
