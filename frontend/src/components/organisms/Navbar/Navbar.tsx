@@ -1,11 +1,12 @@
 "use client";
 
-import Link from "next/link";
-import { usePathname } from "next/navigation";
 import { useUserStore } from "@/store/auth.store";
 import { cn } from "@/utils/cn";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { PageLogo } from "../../atoms/PageLogo/PageLogo";
 import { NavUserSection } from "../NavUserSection/NavUserSection";
+import { NavbarMenuButton } from "../NavbarMenuButton/NavbarMenuButton";
 
 export function Navbar() {
   const user = useUserStore((state) => state.user);
@@ -24,16 +25,19 @@ export function Navbar() {
     >
       <div
         className={cn(
-          "mx-auto flex w-[90%] justify-between py-4",
+          "mx-auto flex w-full justify-between pr-5 pl-2 py-4",
           !isDashboard && "w-[95%] max-w-7xl"
         )}
       >
-        <Link
-          href={user ? homePathByRole : "/"}
-          className="flex h-[inherit] items-center text-center text-2xl font-bold text-purple-700"
-        >
-          <PageLogo isRecruiter={isRecruiter} />
-        </Link>
+        <div className="flex items-center gap-2">
+          {user && <NavbarMenuButton isRecruiter={isRecruiter} />}
+          <Link
+            href={user ? homePathByRole : "/"}
+            className="flex h-[inherit] items-center text-center text-2xl font-bold text-purple-700"
+          >
+            <PageLogo isRecruiter={isRecruiter} />
+          </Link>
+        </div>
         <NavUserSection isRecruiter={isRecruiter} />
       </div>
     </header>
