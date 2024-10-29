@@ -8,7 +8,7 @@ const prisma = new PrismaClient()
 export class OfferService {
 
     public async create(createOfferDto: CreateOfferDto) {
-        const { title, description, ownerId, salary, requirements, location, modality, status, creationDate } = createOfferDto
+        const { title, description, ownerId, salary, requirements, location, modality, status, contractType, workDay, companyName, companyDescription } = createOfferDto
 
         return prisma.offers.create({
             data: {
@@ -21,8 +21,11 @@ export class OfferService {
                 requirements,
                 location,
                 modality,
+                contractType,
+                workDay,
+                companyName,
+                companyDescription,
                 status: OfferStatus[status],
-                creationDate: new Date(),
             }
         })
     }
@@ -57,7 +60,8 @@ export class OfferService {
     }
 
     public async update(id: number, updateData: Partial<CreateOfferDto>) {
-        const { title, description, ownerId, salary, requirements, location, modality, status, creationDate, applications } = updateData;
+
+        const { title, description, ownerId, salary, requirements, location, companyName, companyDescription, contractType, workDay, modality, status, creationDate, applications } = updateData;
 
         return prisma.offers.update({
             where: { id },
@@ -69,6 +73,10 @@ export class OfferService {
                 requirements,
                 location,
                 modality,
+                contractType,
+                workDay,
+                companyName,
+                companyDescription,
                 status,
                 creationDate: creationDate || new Date(),
                 applications: applications
