@@ -3,9 +3,9 @@ import { Text } from "@/components/atoms/Text/Text";
 
 type OwnerOfferInfoProps = {
   card?: boolean;
-  recruiter: string;
+  recruiter?: string;
   title: string;
-  image: string;
+  image?: string;
 };
 
 export const OwnerOfferInfo: React.FC<OwnerOfferInfoProps> = ({

@@ -18,8 +18,8 @@ export const OfferResume: React.FC<OfferResumeProps> = ({ offer }) => {
       />
       <JobDetailsChips
         location={offer.location}
-        remote={offer.remote}
-        type={offer.type}
+        workDay={offer.workDay}
+        modality={offer.modality}
       />
       <Text variant="Paragraph-2/14" className="mt-2 w-full text-gray-700">
         Publicado {offer.date}

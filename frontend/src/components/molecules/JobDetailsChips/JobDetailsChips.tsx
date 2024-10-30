@@ -2,28 +2,32 @@ import { Chip } from "@/components/atoms/Chip/Chip";
 
 type JobDetailsChipsProps = {
   location: string;
-  remote: boolean;
-  type: string;
+  modality: string;
+  workDay: string;
 };
 
 export const JobDetailsChips: React.FC<JobDetailsChipsProps> = ({
   location,
-  remote,
-  type,
+  modality,
+  workDay,
 }) => {
   return (
     <div className="flex flex-row flex-wrap">
-      <Chip className="mb-2 mr-2" variant="default" location={true}>
-        {location}
-      </Chip>
-      {remote && (
-        <Chip className="mb-2 mr-2" variant="default">
-          Remoto
+      {location ? (
+        <Chip className="mb-2 mr-2" variant="default" location={true}>
+          {location}
         </Chip>
-      )}
-      <Chip className="mb-2 mr-2" variant="default">
-        {type}
-      </Chip>
+      ) : null}
+      {modality ? (
+        <Chip className="mb-2 mr-2" variant="default">
+          {modality}
+        </Chip>
+      ) : null}
+      {workDay ? (
+        <Chip className="mb-2 mr-2" variant="default">
+          {workDay}
+        </Chip>
+      ) : null}
     </div>
   );
 };
