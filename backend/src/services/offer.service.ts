@@ -30,9 +30,34 @@ export class OfferService {
         })
     }
 
+    // public async getAll() {
+    //     return prisma.offers.findMany()
+    // }
     public async getAll() {
-        return prisma.offers.findMany()
-    }
+        return prisma.offers.findMany({
+          select: {
+            id: true,
+            title: true,
+            description: true,
+            salary: true,
+            requirements: true,
+            location: true,
+            modality: true,
+            status: true,
+            creationDate: true,
+            contractType: true,
+            workDay: true,
+            companyName: true,
+            companyDescription: true,
+            owner: {
+              select: {
+                id: true,
+                fullName: true, // Include fullName of the owner
+              },
+            },
+          },
+        });
+      }
 
     public async getFiltered(status: string, page: number, limit: number) {
         const skip = (page - 1) * limit
@@ -53,11 +78,39 @@ export class OfferService {
         }
     }
 
+    // public async getById(id: number) {
+    //     return prisma.offers.findUnique({
+    //         where: { id }
+    //     })
+    // }
+
     public async getById(id: number) {
         return prisma.offers.findUnique({
-            where: { id }
-        })
-    }
+          where: { id },
+          select: {
+            id: true,
+            title: true,
+            description: true,
+            salary: true,
+            requirements: true,
+            location: true,
+            modality: true,
+            status: true,
+            creationDate: true,
+            contractType: true,
+            workDay: true,
+            companyName: true,
+            companyDescription: true,
+            owner: {
+              select: {
+                id: true,
+                fullName: true, // Include fullName of the owner
+              },
+            },
+          },
+        });
+      }
+      
 
     public async update(id: number, updateData: Partial<CreateOfferDto>) {
 
