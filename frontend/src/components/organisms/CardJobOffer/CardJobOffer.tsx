@@ -5,8 +5,8 @@ import { useRouter } from "next/navigation";
 import { Text } from "@/components/atoms/Text/Text";
 import { JobDetailsChips } from "@/components/molecules/JobDetailsChips/JobDetailsChips";
 import { OwnerOfferInfo } from "@/components/molecules/OwnerOfferInfo/OwnerOfferInfo";
-import { getFormattedDate } from "@/hooks/formattedDate";
 import { type OfferDto } from "@/types/offers.types";
+import { getFormattedDate } from "@/utils/offersUtils";
 
 interface JobOfferProps {
   offer: OfferDto;
