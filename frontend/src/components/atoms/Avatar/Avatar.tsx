@@ -1,6 +1,7 @@
 import Image from "next/image";
 import React from "react";
 import { type VariantProps } from "class-variance-authority";
+import { User } from "lucide-react";
 import { cn } from "@/utils/cn";
 import { avatarVariants } from "./Avatar.styles";
 
@@ -8,7 +9,6 @@ interface AvatarProps extends VariantProps<typeof avatarVariants> {
   className?: string;
   src?: string;
   alt?: string;
-  fallBackText?: string;
 }
 
 export const Avatar: React.FC<AvatarProps> = ({
@@ -17,7 +17,6 @@ export const Avatar: React.FC<AvatarProps> = ({
   size,
   src,
   alt = "",
-  fallBackText = "T",
   ...props
 }) => {
   return (
@@ -34,8 +33,8 @@ export const Avatar: React.FC<AvatarProps> = ({
           className="h-full w-full object-cover"
         />
       ) : (
-        <div className="flex h-full w-full items-center justify-center bg-gray-400 text-white">
-          {fallBackText}
+        <div className="flex h-full w-full items-center justify-center bg-violet-700 font-black text-violet-200">
+          <User />
         </div>
       )}
     </div>

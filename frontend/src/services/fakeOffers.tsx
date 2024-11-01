@@ -2,7 +2,8 @@ export type JobOfferType = {
   id: number;
   title: string;
   location: string;
-  remote: boolean;
+  modality: string;
+  workDay: string;
   type: string;
   recruiter: string;
   image: string;
