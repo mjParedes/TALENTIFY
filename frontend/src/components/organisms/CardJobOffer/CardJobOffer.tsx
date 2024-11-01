@@ -1,9 +1,11 @@
 "use client";
 
+// Ajusta la ruta según tu estructura de carpetas
 import { useRouter } from "next/navigation";
 import { Text } from "@/components/atoms/Text/Text";
 import { JobDetailsChips } from "@/components/molecules/JobDetailsChips/JobDetailsChips";
 import { OwnerOfferInfo } from "@/components/molecules/OwnerOfferInfo/OwnerOfferInfo";
+import { getFormattedDate } from "@/hooks/formattedDate";
 import { type OfferDto } from "@/types/offers.types";
 
 interface JobOfferProps {
@@ -12,31 +14,6 @@ interface JobOfferProps {
 
 export const CardJobOffer: React.FC<JobOfferProps> = ({ offer }) => {
   const router = useRouter();
-  const getFormattedDate = (dateString: string) => {
-    const offerDate = new Date(dateString);
-    const today = new Date();
-
-    const dayDifference = Math.floor(
-      (today.getTime() - offerDate.getTime()) / (1000 * 60 * 60 * 24)
-    );
-
-    if (dayDifference === 0) {
-      return "Publicado hoy";
-    } else if (dayDifference === 1) {
-      return "Publicado ayer";
-    } else if (dayDifference <= 7) {
-      return `Publicado hace ${dayDifference} días`;
-    } else {
-      return (
-        `Publicado el ` +
-        new Intl.DateTimeFormat("es-ES", {
-          year: "numeric",
-          month: "long",
-          day: "numeric",
-        }).format(offerDate)
-      );
-    }
-  };
 
   const formattedDate = getFormattedDate(offer.creationDate);
 
@@ -55,11 +32,8 @@ export const CardJobOffer: React.FC<JobOfferProps> = ({ offer }) => {
     >
       <OwnerOfferInfo
         card
-        /* 
-          recruiter={offer.recruiter}
-          image={offer.image}
-        */
         title={offer.title}
+        ownerFullName={offer.owner.fullName}
       />
       <JobDetailsChips
         workDay={offer?.workDay}

@@ -3,14 +3,14 @@ import { Text } from "@/components/atoms/Text/Text";
 
 type OwnerOfferInfoProps = {
   card?: boolean;
-  recruiter?: string;
+  ownerFullName?: string;
   title: string;
   image?: string;
 };
 
 export const OwnerOfferInfo: React.FC<OwnerOfferInfoProps> = ({
   card,
-  recruiter,
+  ownerFullName,
   title,
   image,
 }) => {
@@ -23,7 +23,7 @@ export const OwnerOfferInfo: React.FC<OwnerOfferInfoProps> = ({
           className="ml-2"
           variant={card ? "Subheadline-4/16" : "Subheadline-2/20"}
         >
-          {recruiter}
+          {ownerFullName}
         </Text>
       </div>
     </div>

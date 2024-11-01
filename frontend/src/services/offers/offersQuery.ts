@@ -1,9 +1,23 @@
-import { useQuery } from "@tanstack/react-query";
-import { getAllOffers } from "./offersApi";
+import { useQuery, type UseQueryResult } from "@tanstack/react-query";
+import { useOffersStore } from "@/store/offers.store";
+import { type OfferDto } from "@/types/offers.types";
+import { getAllOffers, getOfferById } from "./offersApi";
 
-export const useOffers = () => {
+export const useGetAllOffers = (): UseQueryResult<OfferDto[]> => {
+  const setJobOffers = useOffersStore((state) => state.setOffers);
+
   return useQuery({
     queryKey: ["offers"],
-    queryFn: getAllOffers,
+    queryFn: () => getAllOffers({ setJobOffers }),
+  });
+};
+
+export const useGetOfferById = (
+  id: number
+): UseQueryResult<OfferDto | null> => {
+  return useQuery<OfferDto | null>({
+    queryKey: ["offer", id],
+    queryFn: () => getOfferById(id),
+    enabled: id !== 0,
   });
 };

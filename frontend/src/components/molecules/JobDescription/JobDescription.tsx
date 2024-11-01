@@ -1,20 +1,21 @@
 import { Text } from "@/components/atoms/Text/Text";
+import { type OfferDto } from "@/types/offers.types";
 
-export const JobDescription = () => {
+interface JobDescriptionProps {
+  offer: OfferDto;
+}
+
+export const JobDescription: React.FC<JobDescriptionProps> = ({ offer }) => {
   return (
     <div>
       <Text variant="Headline-3/20">Descripción del empleo</Text>
       <Text className="py-2" variant="Paragraph-2/14">
-        Buscamos un Desarrollador Full Stack con experiencia en la creación de
-        aplicaciones web escalables utilizando tecnologías modernas. El
-        candidato ideal debe tener un sólido conocimiento en frontend y backend,
-        ser proactivo y capaz de trabajar en equipo para resolver problemas
-        complejos.
+        {offer?.description}
       </Text>
       <Text variant="Subheadline-4/16" className="mt-2 py-4">
         Sueldo
       </Text>
-      <Text variant="Paragraph-2/14">$80,000 - $100,000 USD anual</Text>
+      <Text variant="Paragraph-2/14">{offer?.salary}</Text>
     </div>
   );
 };
